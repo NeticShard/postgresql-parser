@@ -15,19 +15,19 @@ import (
 	"strings"
 	"time"
 
-	//"github.com/auxten/postgresql-parser/pkg/server/telemetry"
-	"github.com/auxten/postgresql-parser/pkg/sql/lex"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/sessiondata"
+	//"github.com/neticshard/postgresql-parser/pkg/server/telemetry"
 	"github.com/cockroachdb/errors"
+	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
 	"golang.org/x/text/language"
 
-	//"github.com/auxten/postgresql-parser/pkg/sql/sqltelemetry"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/errorutil/unimplemented"
-	"github.com/auxten/postgresql-parser/pkg/util/hlc"
-	"github.com/auxten/postgresql-parser/pkg/util/timeutil"
+	//"github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticshard/postgresql-parser/pkg/util/hlc"
+	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
 )
 
 // SemaContext defines the context in which to perform semantic analysis on an
@@ -475,7 +475,7 @@ func (expr *CastExpr) TypeCheck(ctx *SemaContext, _ *types.T) (TypedExpr, error)
 	castFrom := typedSubExpr.ResolvedType()
 
 	if ok := isCastDeepValid(castFrom, expr.Type); ok {
-		//telemetry.Inc(c)
+		// telemetry.Inc(c)
 		expr.Expr = typedSubExpr
 		expr.typ = expr.Type
 		return expr, nil
@@ -512,7 +512,7 @@ func (expr *IndirectionExpr) TypeCheck(ctx *SemaContext, desired *types.T) (Type
 	expr.Expr = subExpr
 	expr.typ = typ.ArrayContents()
 
-	//telemetry.Inc(sqltelemetry.ArraySubscriptCounter)
+	// telemetry.Inc(sqltelemetry.ArraySubscriptCounter)
 	return expr, nil
 }
 
@@ -1016,7 +1016,7 @@ func (expr *IfErrExpr) TypeCheck(ctx *SemaContext, desired *types.T) (TypedExpr,
 	expr.ErrCode = typedErrCode
 	expr.typ = retType
 
-	//telemetry.Inc(sqltelemetry.IfErrCounter)
+	// telemetry.Inc(sqltelemetry.IfErrCounter)
 	return expr, nil
 }
 
@@ -1299,7 +1299,7 @@ func (expr *Array) TypeCheck(ctx *SemaContext, desired *types.T) (TypedExpr, err
 		expr.Exprs[i] = typedSubExprs[i]
 	}
 
-	//telemetry.Inc(sqltelemetry.ArrayConstructorCounter)
+	// telemetry.Inc(sqltelemetry.ArrayConstructorCounter)
 	return expr, nil
 }
 
@@ -1317,7 +1317,7 @@ func (expr *ArrayFlatten) TypeCheck(ctx *SemaContext, desired *types.T) (TypedEx
 	expr.Subquery = subqueryTyped
 	expr.typ = types.MakeArray(subqueryTyped.ResolvedType())
 
-	//telemetry.Inc(sqltelemetry.ArrayFlattenCounter)
+	// telemetry.Inc(sqltelemetry.ArrayFlattenCounter)
 	return expr, nil
 }
 
@@ -2302,17 +2302,17 @@ func (*placeholderAnnotationVisitor) VisitPost(expr Expr) Expr { return expr }
 // provided Statement, annotating all placeholders with a type in either of the following
 // situations:
 //
-//  - the placeholder is the subject of an explicit type annotation in at least one
-//    of its occurrences. If it is subject to multiple explicit type annotations
-//    where the types are not all in agreement, or if the placeholder already has
-//    a type hint in the placeholder map which conflicts with the explicit type
-//    annotation type, an error will be thrown.
+//   - the placeholder is the subject of an explicit type annotation in at least one
+//     of its occurrences. If it is subject to multiple explicit type annotations
+//     where the types are not all in agreement, or if the placeholder already has
+//     a type hint in the placeholder map which conflicts with the explicit type
+//     annotation type, an error will be thrown.
 //
-//  - the placeholder is the subject to a cast of the same type in all
-//    occurrences of the placeholder. If the placeholder is subject to casts of
-//    multiple types, or if it has occurrences without a cast, no error will be
-//    thrown but the type will not be inferred. If the placeholder already has a
-//    type hint, that type will be kept regardless of any casts.
+//   - the placeholder is the subject to a cast of the same type in all
+//     occurrences of the placeholder. If the placeholder is subject to casts of
+//     multiple types, or if it has occurrences without a cast, no error will be
+//     thrown but the type will not be inferred. If the placeholder already has a
+//     type hint, that type will be kept regardless of any casts.
 //
 // See docs/RFCS/20160203_typing.md for more details on placeholder typing (in
 // particular section "First pass: placeholder annotations").

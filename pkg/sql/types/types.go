@@ -18,9 +18,9 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/lib/pq/oid"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/lex"
-	"github.com/auxten/postgresql-parser/pkg/util/errorutil/unimplemented"
-	"github.com/auxten/postgresql-parser/pkg/util/protoutil"
+	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
+	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticshard/postgresql-parser/pkg/util/protoutil"
 )
 
 // T is an instance of a SQL scalar, array, or tuple type. It describes the
@@ -29,26 +29,26 @@ import (
 // nullable and non-nullable types. It is up to the caller to store that
 // information separately if it is needed. Here are some example types:
 //
-//   INT4                     - any 32-bit integer
-//   DECIMAL(10, 3)           - any base-10 value with at most 10 digits, with
-//                              up to 3 to right of decimal point
-//   FLOAT[]                  - array of 64-bit IEEE 754 floating-point values
-//   TUPLE[TIME, VARCHAR(20)] - any pair of values where first value is a time
-//                              of day and the second value is a string having
-//                              up to 20 characters
+//	INT4                     - any 32-bit integer
+//	DECIMAL(10, 3)           - any base-10 value with at most 10 digits, with
+//	                           up to 3 to right of decimal point
+//	FLOAT[]                  - array of 64-bit IEEE 754 floating-point values
+//	TUPLE[TIME, VARCHAR(20)] - any pair of values where first value is a time
+//	                           of day and the second value is a string having
+//	                           up to 20 characters
 //
 // Fundamentally, a type consists of the following attributes, each of which has
 // a corresponding accessor method. Some of these attributes are only defined
 // for a subset of types. See the method comments for more details.
 //
-//   Family        - equivalence group of the type (enumeration)
-//   Oid           - Postgres Object ID that describes the type (enumeration)
-//   Precision     - maximum accuracy of the type (numeric)
-//   Width         - maximum size or scale of the type (numeric)
-//   Locale        - location which governs sorting, formatting, etc. (string)
-//   ArrayContents - array element type (T)
-//   TupleContents - slice of types of each tuple field ([]T)
-//   TupleLabels   - slice of labels of each tuple field ([]string)
+//	Family        - equivalence group of the type (enumeration)
+//	Oid           - Postgres Object ID that describes the type (enumeration)
+//	Precision     - maximum accuracy of the type (numeric)
+//	Width         - maximum size or scale of the type (numeric)
+//	Locale        - location which governs sorting, formatting, etc. (string)
+//	ArrayContents - array element type (T)
+//	TupleContents - slice of types of each tuple field ([]T)
+//	TupleLabels   - slice of labels of each tuple field ([]string)
 //
 // Some types are not currently allowed as the type of a column (e.g. nested
 // arrays). Other usages of the types package may have similar restrictions.
@@ -152,7 +152,6 @@ import (
 //
 // When these types are themselves made into arrays, the Oids become T__int2vector and
 // T__oidvector, respectively.
-//
 type T struct {
 	// InternalType should never be directly referenced outside this package. The
 	// only reason it is exported is because gogoproto panics when printing the
@@ -169,68 +168,81 @@ var (
 	// This type should never be returned for an expression that does not *always*
 	// evaluate to NULL.
 	Unknown = &T{InternalType: InternalType{
-		Family: UnknownFamily, Oid: oid.T_unknown, Locale: &emptyLocale}}
+		Family: UnknownFamily, Oid: oid.T_unknown, Locale: &emptyLocale,
+	}}
 
 	// Bool is the type of a boolean true/false value.
 	Bool = &T{InternalType: InternalType{
-		Family: BoolFamily, Oid: oid.T_bool, Locale: &emptyLocale}}
+		Family: BoolFamily, Oid: oid.T_bool, Locale: &emptyLocale,
+	}}
 
 	// VarBit is the type of an ordered list of bits (0 or 1 valued), with no
 	// specified limit on the count of bits.
 	VarBit = &T{InternalType: InternalType{
-		Family: BitFamily, Oid: oid.T_varbit, Locale: &emptyLocale}}
+		Family: BitFamily, Oid: oid.T_varbit, Locale: &emptyLocale,
+	}}
 
 	// Int is the type of a 64-bit signed integer. This is the canonical type
 	// for IntFamily.
 	Int = &T{InternalType: InternalType{
-		Family: IntFamily, Width: 64, Oid: oid.T_int8, Locale: &emptyLocale}}
+		Family: IntFamily, Width: 64, Oid: oid.T_int8, Locale: &emptyLocale,
+	}}
 
 	// Int4 is the type of a 32-bit signed integer.
 	Int4 = &T{InternalType: InternalType{
-		Family: IntFamily, Width: 32, Oid: oid.T_int4, Locale: &emptyLocale}}
+		Family: IntFamily, Width: 32, Oid: oid.T_int4, Locale: &emptyLocale,
+	}}
 
 	// Int2 is the type of a 16-bit signed integer.
 	Int2 = &T{InternalType: InternalType{
-		Family: IntFamily, Width: 16, Oid: oid.T_int2, Locale: &emptyLocale}}
+		Family: IntFamily, Width: 16, Oid: oid.T_int2, Locale: &emptyLocale,
+	}}
 
 	// Float is the type of a 64-bit base-2 floating-point number (IEEE 754).
 	// This is the canonical type for FloatFamily.
 	Float = &T{InternalType: InternalType{
-		Family: FloatFamily, Width: 64, Oid: oid.T_float8, Locale: &emptyLocale}}
+		Family: FloatFamily, Width: 64, Oid: oid.T_float8, Locale: &emptyLocale,
+	}}
 
 	// Float4 is the type of a 32-bit base-2 floating-point number (IEEE 754).
 	Float4 = &T{InternalType: InternalType{
-		Family: FloatFamily, Width: 32, Oid: oid.T_float4, Locale: &emptyLocale}}
+		Family: FloatFamily, Width: 32, Oid: oid.T_float4, Locale: &emptyLocale,
+	}}
 
 	// Decimal is the type of a base-10 floating-point number, with no specified
 	// limit on precision (number of digits) or scale (digits to right of decimal
 	// point).
 	Decimal = &T{InternalType: InternalType{
-		Family: DecimalFamily, Oid: oid.T_numeric, Locale: &emptyLocale}}
+		Family: DecimalFamily, Oid: oid.T_numeric, Locale: &emptyLocale,
+	}}
 
 	// String is the type of a Unicode string, with no specified limit on the
 	// count of characters. This is the canonical type for StringFamily. It is
 	// reported as STRING in SHOW CREATE but "text" in introspection for
 	// compatibility with PostgreSQL.
 	String = &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_text, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_text, Locale: &emptyLocale,
+	}}
 
 	// VarChar is equivalent to String, but has a differing OID (T_varchar),
 	// which makes it show up differently when displayed. It is reported as
 	// VARCHAR in SHOW CREATE and "character varying" in introspection for
 	// compatibility with PostgreSQL.
 	VarChar = &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_varchar, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_varchar, Locale: &emptyLocale,
+	}}
 
 	// Name is a type-alias for String with a different OID (T_name). It is
 	// reported as NAME in SHOW CREATE and "name" in introspection for
 	// compatibility with PostgreSQL.
 	Name = &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_name, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_name, Locale: &emptyLocale,
+	}}
 
 	// Bytes is the type of a list of raw byte values.
 	Bytes = &T{InternalType: InternalType{
-		Family: BytesFamily, Oid: oid.T_bytea, Locale: &emptyLocale}}
+		Family: BytesFamily, Oid: oid.T_bytea, Locale: &emptyLocale,
+	}}
 
 	// Date is the type of a value specifying year, month, day (with no time
 	// component). There is no timezone associated with it. For example:
@@ -238,7 +250,8 @@ var (
 	//   YYYY-MM-DD
 	//
 	Date = &T{InternalType: InternalType{
-		Family: DateFamily, Oid: oid.T_date, Locale: &emptyLocale}}
+		Family: DateFamily, Oid: oid.T_date, Locale: &emptyLocale,
+	}}
 
 	// Time is the type of a value specifying hour, minute, second (with no date
 	// component). By default, it has microsecond precision. There is no timezone
@@ -309,13 +322,15 @@ var (
 	// Jsonb is the type of a JavaScript Object Notation (JSON) value that is
 	// stored in a decomposed binary format (hence the "b" in jsonb).
 	Jsonb = &T{InternalType: InternalType{
-		Family: JsonFamily, Oid: oid.T_jsonb, Locale: &emptyLocale}}
+		Family: JsonFamily, Oid: oid.T_jsonb, Locale: &emptyLocale,
+	}}
 
 	// Uuid is the type of a universally unique identifier (UUID), which is a
 	// 128-bit quantity that is very unlikely to ever be generated again, and so
 	// can be relied on to be distinct from all other UUID values.
 	Uuid = &T{InternalType: InternalType{
-		Family: UuidFamily, Oid: oid.T_uuid, Locale: &emptyLocale}}
+		Family: UuidFamily, Oid: oid.T_uuid, Locale: &emptyLocale,
+	}}
 
 	// INet is the type of an IPv4 or IPv6 network address. For example:
 	//
@@ -323,7 +338,8 @@ var (
 	//   FE80:CD00:0:CDE:1257:0:211E:729C
 	//
 	INet = &T{InternalType: InternalType{
-		Family: INetFamily, Oid: oid.T_inet, Locale: &emptyLocale}}
+		Family: INetFamily, Oid: oid.T_inet, Locale: &emptyLocale,
+	}}
 
 	// Scalar contains all types that meet this criteria:
 	//
@@ -357,48 +373,57 @@ var (
 	// use, many SQL builtin functions allow an input value to be of any type,
 	// and so use this type in their static definitions.
 	Any = &T{InternalType: InternalType{
-		Family: AnyFamily, Oid: oid.T_anyelement, Locale: &emptyLocale}}
+		Family: AnyFamily, Oid: oid.T_anyelement, Locale: &emptyLocale,
+	}}
 
 	// AnyArray is a special type used only during static analysis as a wildcard
 	// type that matches an array having elements of any (uniform) type (including
 	// nested array types). Execution-time values should never have this type.
 	AnyArray = &T{InternalType: InternalType{
-		Family: ArrayFamily, ArrayContents: Any, Oid: oid.T_anyarray, Locale: &emptyLocale}}
+		Family: ArrayFamily, ArrayContents: Any, Oid: oid.T_anyarray, Locale: &emptyLocale,
+	}}
 
 	// AnyTuple is a special type used only during static analysis as a wildcard
 	// type that matches a tuple with any number of fields of any type (including
 	// tuple types). Execution-time values should never have this type.
 	AnyTuple = &T{InternalType: InternalType{
-		Family: TupleFamily, TupleContents: []T{*Any}, Oid: oid.T_record, Locale: &emptyLocale}}
+		Family: TupleFamily, TupleContents: []T{*Any}, Oid: oid.T_record, Locale: &emptyLocale,
+	}}
 
 	// AnyCollatedString is a special type used only during static analysis as a
 	// wildcard type that matches a collated string with any locale. Execution-
 	// time values should never have this type.
 	AnyCollatedString = &T{InternalType: InternalType{
-		Family: CollatedStringFamily, Oid: oid.T_text, Locale: &emptyLocale}}
+		Family: CollatedStringFamily, Oid: oid.T_text, Locale: &emptyLocale,
+	}}
 
 	// EmptyTuple is the tuple type with no fields. Note that this is different
 	// than AnyTuple, which is a wildcard type.
 	EmptyTuple = &T{InternalType: InternalType{
-		Family: TupleFamily, Oid: oid.T_record, Locale: &emptyLocale}}
+		Family: TupleFamily, Oid: oid.T_record, Locale: &emptyLocale,
+	}}
 
 	// StringArray is the type of an array value having String-typed elements.
 	StringArray = &T{InternalType: InternalType{
-		Family: ArrayFamily, ArrayContents: String, Oid: oid.T__text, Locale: &emptyLocale}}
+		Family: ArrayFamily, ArrayContents: String, Oid: oid.T__text, Locale: &emptyLocale,
+	}}
 
 	// IntArray is the type of an array value having Int-typed elements.
 	IntArray = &T{InternalType: InternalType{
-		Family: ArrayFamily, ArrayContents: Int, Oid: oid.T__int8, Locale: &emptyLocale}}
+		Family: ArrayFamily, ArrayContents: Int, Oid: oid.T__int8, Locale: &emptyLocale,
+	}}
 
 	// DecimalArray is the type of an array value having Decimal-typed elements.
 	DecimalArray = &T{InternalType: InternalType{
-		Family: ArrayFamily, ArrayContents: Decimal, Oid: oid.T__numeric, Locale: &emptyLocale}}
+		Family: ArrayFamily, ArrayContents: Decimal, Oid: oid.T__numeric, Locale: &emptyLocale,
+	}}
 
 	// Int2Vector is a type-alias for an array of Int2 values with a different
 	// OID (T_int2vector instead of T__int2). It is a special VECTOR type used
 	// by Postgres in system tables. Int2vectors are 0-indexed, unlike normal arrays.
 	Int2Vector = &T{InternalType: InternalType{
-		Family: ArrayFamily, Oid: oid.T_int2vector, ArrayContents: Int2, Locale: &emptyLocale}}
+		Family: ArrayFamily, Oid: oid.T_int2vector, ArrayContents: Int2, Locale: &emptyLocale,
+	}}
 )
 
 // Unexported wrapper types.
@@ -407,7 +432,8 @@ var (
 	// the VarBit type, and confusion over whether its default Width is
 	// unspecified or is 1. More commonly used instead is the VarBit type.
 	typeBit = &T{InternalType: InternalType{
-		Family: BitFamily, Oid: oid.T_bit, Locale: &emptyLocale}}
+		Family: BitFamily, Oid: oid.T_bit, Locale: &emptyLocale,
+	}}
 
 	// typeBpChar is the "standard SQL" string type of fixed length, where "bp"
 	// stands for "blank padded". It is not exported to avoid confusion with
@@ -418,7 +444,8 @@ var (
 	//
 	// Its default maximum with is 1. It always has a maximum width.
 	typeBpChar = &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_bpchar, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_bpchar, Locale: &emptyLocale,
+	}}
 
 	// typeQChar is a special PostgreSQL-only type supported for compatibility.
 	// It behaves like VARCHAR, its maximum width cannot be modified, and has a
@@ -428,7 +455,8 @@ var (
 	// It is reported as "char" (with double quotes included) in SHOW CREATE and
 	// "char" in introspection for compatibility with PostgreSQL.
 	typeQChar = &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_char, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_char, Locale: &emptyLocale,
+	}}
 )
 
 const (
@@ -483,9 +511,7 @@ const (
 	defaultTimePrecision = 6
 )
 
-var (
-	emptyLocale = ""
-)
+var emptyLocale = ""
 
 // MakeScalar constructs a new instance of a scalar type (i.e. not array or
 // tuple types) using the provided fields.
@@ -578,7 +604,8 @@ func MakeBit(width int32) *T {
 		panic(errors.AssertionFailedf("width %d cannot be negative", width))
 	}
 	return &T{InternalType: InternalType{
-		Family: BitFamily, Oid: oid.T_bit, Width: width, Locale: &emptyLocale}}
+		Family: BitFamily, Oid: oid.T_bit, Width: width, Locale: &emptyLocale,
+	}}
 }
 
 // MakeVarBit constructs a new instance of the BIT type (oid = T_varbit) having
@@ -591,7 +618,8 @@ func MakeVarBit(width int32) *T {
 		panic(errors.AssertionFailedf("width %d cannot be negative", width))
 	}
 	return &T{InternalType: InternalType{
-		Family: BitFamily, Width: width, Oid: oid.T_varbit, Locale: &emptyLocale}}
+		Family: BitFamily, Width: width, Oid: oid.T_varbit, Locale: &emptyLocale,
+	}}
 }
 
 // MakeString constructs a new instance of the STRING type (oid = T_text) having
@@ -604,7 +632,8 @@ func MakeString(width int32) *T {
 		panic(errors.AssertionFailedf("width %d cannot be negative", width))
 	}
 	return &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_text, Width: width, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_text, Width: width, Locale: &emptyLocale,
+	}}
 }
 
 // MakeVarChar constructs a new instance of the VARCHAR type (oid = T_varchar)
@@ -617,7 +646,8 @@ func MakeVarChar(width int32) *T {
 		panic(errors.AssertionFailedf("width %d cannot be negative", width))
 	}
 	return &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_varchar, Width: width, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_varchar, Width: width, Locale: &emptyLocale,
+	}}
 }
 
 // MakeChar constructs a new instance of the CHAR type (oid = T_bpchar) having
@@ -630,7 +660,8 @@ func MakeChar(width int32) *T {
 		panic(errors.AssertionFailedf("width %d cannot be negative", width))
 	}
 	return &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_bpchar, Width: width, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_bpchar, Width: width, Locale: &emptyLocale,
+	}}
 }
 
 // MakeQChar constructs a new instance of the "char" type (oid = T_char) having
@@ -640,21 +671,22 @@ func MakeQChar(width int32) *T {
 		return typeQChar
 	}
 	return &T{InternalType: InternalType{
-		Family: StringFamily, Oid: oid.T_char, Width: width, Locale: &emptyLocale}}
+		Family: StringFamily, Oid: oid.T_char, Width: width, Locale: &emptyLocale,
+	}}
 }
 
 // MakeCollatedString constructs a new instance of a CollatedStringFamily type
 // that is collated according to the given locale. The new type is based upon
 // the given string type, having the same oid and width values. For example:
 //
-//   STRING      => STRING COLLATE EN
-//   VARCHAR(20) => VARCHAR(20) COLLATE EN
-//
+//	STRING      => STRING COLLATE EN
+//	VARCHAR(20) => VARCHAR(20) COLLATE EN
 func MakeCollatedString(strType *T, locale string) *T {
 	switch strType.Oid() {
 	case oid.T_text, oid.T_varchar, oid.T_bpchar, oid.T_char, oid.T_name:
 		return &T{InternalType: InternalType{
-			Family: CollatedStringFamily, Oid: strType.Oid(), Width: strType.Width(), Locale: &locale}}
+			Family: CollatedStringFamily, Oid: strType.Oid(), Width: strType.Width(), Locale: &locale,
+		}}
 	}
 	panic(errors.AssertionFailedf("cannot apply collation to non-string type: %s", strType))
 }
@@ -714,12 +746,10 @@ func MakeTimeTZ(precision int32) *T {
 	}}
 }
 
-var (
-	// DefaultIntervalTypeMetadata returns a duration field that is unset,
-	// using INTERVAL or INTERVAL ( iconst32 ) syntax instead of INTERVAL
-	// with a qualifier afterwards.
-	DefaultIntervalTypeMetadata = IntervalTypeMetadata{}
-)
+// DefaultIntervalTypeMetadata returns a duration field that is unset,
+// using INTERVAL or INTERVAL ( iconst32 ) syntax instead of INTERVAL
+// with a qualifier afterwards.
+var DefaultIntervalTypeMetadata = IntervalTypeMetadata{}
 
 // IntervalTypeMetadata is metadata pertinent for intervals.
 type IntervalTypeMetadata struct {
@@ -900,12 +930,12 @@ func (t *T) Locale() string {
 
 // Width is the size or scale of the type, such as number of bits or characters.
 //
-//   INT           : # of bits (64, 32, 16)
-//   FLOAT         : # of bits (64, 32)
-//   DECIMAL       : max # of digits after decimal point (must be <= Precision)
-//   STRING        : max # of characters
-//   COLLATEDSTRING: max # of characters
-//   BIT           : max # of bits
+//	INT           : # of bits (64, 32, 16)
+//	FLOAT         : # of bits (64, 32)
+//	DECIMAL       : max # of digits after decimal point (must be <= Precision)
+//	STRING        : max # of characters
+//	COLLATEDSTRING: max # of characters
+//	BIT           : max # of bits
 //
 // Width is always 0 for other types.
 func (t *T) Width() int32 {
@@ -914,12 +944,12 @@ func (t *T) Width() int32 {
 
 // Precision is the accuracy of the data type.
 //
-//   DECIMAL    : max # digits (must be >= Width/Scale)
-//   INTERVAL   : max # fractional second digits
-//   TIME       : max # fractional second digits
-//   TIMETZ     : max # fractional second digits
-//   TIMESTAMP  : max # fractional second digits
-//   TIMESTAMPTZ: max # fractional second digits
+//	DECIMAL    : max # digits (must be >= Width/Scale)
+//	INTERVAL   : max # fractional second digits
+//	TIME       : max # fractional second digits
+//	TIMETZ     : max # fractional second digits
+//	TIMESTAMP  : max # fractional second digits
+//	TIMESTAMPTZ: max # fractional second digits
 //
 // Precision for time-related families has special rules for 0 -- see
 // `precision_is_set` on the `InternalType` proto.
@@ -1083,13 +1113,12 @@ func (t *T) Name() string {
 // than the native CRDB name for it (i.e. the Name function). It is used when
 // compatibility with PG is important. Examples of differences:
 //
-//   Name()       PGName()
-//   --------------------------
-//   char         bpchar
-//   "char"       char
-//   bytes        bytea
-//   int4[]       _int4
-//
+//	Name()       PGName()
+//	--------------------------
+//	char         bpchar
+//	"char"       char
+//	bytes        bytea
+//	int4[]       _int4
 func (t *T) PGName() string {
 	name, ok := oid.TypeName[t.Oid()]
 	if ok {
@@ -1108,13 +1137,12 @@ func (t *T) PGName() string {
 // standard (or by Postgres for any non-standard types). This can be looked up
 // for any type in Postgres using a query similar to this:
 //
-//   SELECT format_type(pg_typeof(1::int)::regtype, NULL)
-//
+//	SELECT format_type(pg_typeof(1::int)::regtype, NULL)
 func (t *T) SQLStandardName() string {
 	return t.SQLStandardNameWithTypmod(false, 0)
 }
 
-//var telemetryNameReplaceRegex = regexp.MustCompile("[^a-zA-Z0-9]")
+// var telemetryNameReplaceRegex = regexp.MustCompile("[^a-zA-Z0-9]")
 
 //// TelemetryName returns a name that is friendly for telemetry.
 //func (t *T) TelemetryName() string {
@@ -1125,7 +1153,7 @@ func (t *T) SQLStandardName() string {
 // typmod argument, and a boolean which indicates whether or not a typmod was
 // even specified. The expected results of this function should be, in Postgres:
 //
-//   SELECT format_type('thetype'::regype, typmod)
+//	SELECT format_type('thetype'::regype, typmod)
 //
 // Generally, what this does with a non-0 typmod is append the scale, precision
 // or length of a datatype to the name of the datatype. For example, a
@@ -1558,8 +1586,8 @@ func (t *InternalType) Identical(other *InternalType) bool {
 // protobuf serialization rules. It is backwards-compatible with formats used
 // by older versions of CRDB.
 //
-//   var t T
-//   err := protoutil.Unmarshal(data, &t)
+//	var t T
+//	err := protoutil.Unmarshal(data, &t)
 //
 // Unmarshal is part of the protoutil.Message interface.
 func (t *T) Unmarshal(data []byte) error {
@@ -1772,8 +1800,7 @@ func (t *T) upgradeType() error {
 // version of CRDB so that clusters can run in mixed version mode during
 // upgrade.
 //
-//   bytes, err := protoutil.Marshal(&typ)
-//
+//	bytes, err := protoutil.Marshal(&typ)
 func (t *T) Marshal() (data []byte, err error) {
 	// First downgrade to a struct that will be serialized in a backwards-
 	// compatible bytes format.
@@ -2024,9 +2051,8 @@ func IsWildcardTupleType(t *T) bool {
 // or []COLLATEDSTRING type. This is tricky in the case of an array of collated
 // string, since brackets must precede the COLLATE identifier:
 //
-//   STRING COLLATE EN
-//   VARCHAR(20)[] COLLATE DE
-//
+//	STRING COLLATE EN
+//	VARCHAR(20)[] COLLATE DE
 func (t *T) collatedStringTypeSQL(isArray bool) string {
 	var buf bytes.Buffer
 	buf.WriteString(t.stringTypeSQL())
@@ -2083,9 +2109,9 @@ func init() {
 // TypeForNonKeywordTypeName returns the column type for the string name of a
 // type, if one exists. The third return value indicates:
 //
-//   0 if no error or the type is not known in postgres.
-//   -1 if the type is known in postgres.
-//  >0 for a github issue number.
+//	 0 if no error or the type is not known in postgres.
+//	 -1 if the type is known in postgres.
+//	>0 for a github issue number.
 func TypeForNonKeywordTypeName(name string) (*T, bool, int) {
 	t, ok := typNameLiterals[name]
 	if ok {

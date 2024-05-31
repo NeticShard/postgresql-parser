@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/auxten/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
 )
 
 func TestGenerator(t *testing.T) {

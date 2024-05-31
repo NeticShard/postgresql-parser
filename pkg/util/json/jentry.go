@@ -10,22 +10,26 @@
 
 package json
 
-import "github.com/auxten/postgresql-parser/pkg/util/encoding"
+import "github.com/neticshard/postgresql-parser/pkg/util/encoding"
 
-const nullTag = 0x00000000
-const stringTag = 0x10000000
-const numberTag = 0x20000000
-const falseTag = 0x30000000
-const trueTag = 0x40000000
-const containerTag = 0x50000000
+const (
+	nullTag      = 0x00000000
+	stringTag    = 0x10000000
+	numberTag    = 0x20000000
+	falseTag     = 0x30000000
+	trueTag      = 0x40000000
+	containerTag = 0x50000000
+)
 
-const jEntryIsOffFlag = 0x80000000
-const jEntryTypeMask = 0x70000000
-const jEntryOffLenMask = 0x0FFFFFFF
+const (
+	jEntryIsOffFlag  = 0x80000000
+	jEntryTypeMask   = 0x70000000
+	jEntryOffLenMask = 0x0FFFFFFF
+)
 
 // jEntry is a header for a particular JSON value. See the JSONB encoding RFC
 // for an explanation of its purpose and format:
-// https://github.com/auxten/postgresql-parser/blob/master/docs/RFCS/20171005_jsonb_encoding.md
+// https://github.com/neticshard/postgresql-parser/blob/master/docs/RFCS/20171005_jsonb_encoding.md
 type jEntry struct {
 	typCode uint32
 	length  uint32
@@ -52,9 +56,11 @@ func offsetEncode(offset uint32) encodingMode {
 	return encodingMode{typ: offsetEncoding, offset: offset}
 }
 
-var nullJEntry = jEntry{nullTag, 0}
-var trueJEntry = jEntry{trueTag, 0}
-var falseJEntry = jEntry{falseTag, 0}
+var (
+	nullJEntry  = jEntry{nullTag, 0}
+	trueJEntry  = jEntry{trueTag, 0}
+	falseJEntry = jEntry{falseTag, 0}
+)
 
 func makeStringJEntry(length int) jEntry {
 	return jEntry{stringTag, uint32(length)}

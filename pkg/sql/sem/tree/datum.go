@@ -25,23 +25,23 @@ import (
 	"unsafe"
 
 	"github.com/cockroachdb/apd"
-	"github.com/auxten/postgresql-parser/pkg/sql/lex"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/bitarray"
-	"github.com/auxten/postgresql-parser/pkg/util/duration"
-	"github.com/auxten/postgresql-parser/pkg/util/ipaddr"
-	"github.com/auxten/postgresql-parser/pkg/util/json"
-	"github.com/auxten/postgresql-parser/pkg/util/stringencoding"
-	"github.com/auxten/postgresql-parser/pkg/util/timeofday"
-	"github.com/auxten/postgresql-parser/pkg/util/timetz"
-	"github.com/auxten/postgresql-parser/pkg/util/timeutil"
-	"github.com/auxten/postgresql-parser/pkg/util/timeutil/pgdate"
-	"github.com/auxten/postgresql-parser/pkg/util/uint128"
-	"github.com/auxten/postgresql-parser/pkg/util/uuid"
 	"github.com/cockroachdb/errors"
 	"github.com/lib/pq/oid"
+	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/bitarray"
+	"github.com/neticshard/postgresql-parser/pkg/util/duration"
+	"github.com/neticshard/postgresql-parser/pkg/util/ipaddr"
+	"github.com/neticshard/postgresql-parser/pkg/util/json"
+	"github.com/neticshard/postgresql-parser/pkg/util/stringencoding"
+	"github.com/neticshard/postgresql-parser/pkg/util/timeofday"
+	"github.com/neticshard/postgresql-parser/pkg/util/timetz"
+	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticshard/postgresql-parser/pkg/util/timeutil/pgdate"
+	"github.com/neticshard/postgresql-parser/pkg/util/uint128"
+	"github.com/neticshard/postgresql-parser/pkg/util/uuid"
 	"golang.org/x/text/collate"
 	"golang.org/x/text/language"
 )
@@ -693,8 +693,10 @@ func (d *DInt) IsMin(_ *EvalContext) bool {
 	return *d == math.MinInt64
 }
 
-var dMaxInt = NewDInt(math.MaxInt64)
-var dMinInt = NewDInt(math.MinInt64)
+var (
+	dMaxInt = NewDInt(math.MaxInt64)
+	dMinInt = NewDInt(math.MinInt64)
+)
 
 // Max implements the Datum interface.
 func (d *DInt) Max(_ *EvalContext) (Datum, bool) {
@@ -824,10 +826,12 @@ func (d *DFloat) Next(_ *EvalContext) (Datum, bool) {
 	return NewDFloat(DFloat(math.Nextafter(f, math.Inf(+1)))), true
 }
 
-var dZeroFloat = NewDFloat(0.0)
-var dPosInfFloat = NewDFloat(DFloat(math.Inf(+1)))
-var dNegInfFloat = NewDFloat(DFloat(math.Inf(-1)))
-var dNaNFloat = NewDFloat(DFloat(math.NaN()))
+var (
+	dZeroFloat   = NewDFloat(0.0)
+	dPosInfFloat = NewDFloat(DFloat(math.Inf(+1)))
+	dNegInfFloat = NewDFloat(DFloat(math.Inf(-1)))
+	dNaNFloat    = NewDFloat(DFloat(math.NaN()))
+)
 
 // IsMax implements the Datum interface.
 func (d *DFloat) IsMax(_ *EvalContext) bool {
@@ -990,9 +994,11 @@ func (d *DDecimal) Next(_ *EvalContext) (Datum, bool) {
 	return nil, false
 }
 
-var dZeroDecimal = &DDecimal{Decimal: apd.Decimal{}}
-var dPosInfDecimal = &DDecimal{Decimal: apd.Decimal{Form: apd.Infinite, Negative: false}}
-var dNaNDecimal = &DDecimal{Decimal: apd.Decimal{Form: apd.NaN}}
+var (
+	dZeroDecimal   = &DDecimal{Decimal: apd.Decimal{}}
+	dPosInfDecimal = &DDecimal{Decimal: apd.Decimal{Form: apd.Infinite, Negative: false}}
+	dNaNDecimal    = &DDecimal{Decimal: apd.Decimal{Form: apd.NaN}}
+)
 
 // IsMax implements the Datum interface.
 func (d *DDecimal) IsMax(_ *EvalContext) bool {
@@ -1130,7 +1136,6 @@ func (d *DString) Compare(ctx *EvalContext, other Datum) int {
 func (d *DString) Prev(_ *EvalContext) (Datum, bool) {
 	return nil, false
 }
-
 
 // Key is a custom type for a byte string in proto
 // messages which refer to Cockroach keys.
@@ -1531,8 +1536,10 @@ func (d *DUuid) IsMin(_ *EvalContext) bool {
 var DMinUUID = NewDUuid(DUuid{uuid.UUID{}})
 
 // DMaxUUID is the max UUID.
-var DMaxUUID = NewDUuid(DUuid{uuid.UUID{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}})
+var DMaxUUID = NewDUuid(DUuid{uuid.UUID{
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+}})
 
 // Min implements the Datum interface.
 func (*DUuid) Min(_ *EvalContext) (Datum, bool) {
@@ -1678,15 +1685,19 @@ func (d *DIPAddr) IsMin(_ *EvalContext) bool {
 // dIPv4 and dIPv6 min and maxes use ParseIP because the actual byte constant is
 // no equal to solely zeros or ones. For IPv4 there is a 0xffff prefix. Without
 // this prefix this makes IP arithmetic invalid.
-var dIPv4min = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("0.0.0.0"))))
-var dIPv4max = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("255.255.255.255"))))
-var dIPv6min = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("::"))))
-var dIPv6max = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))))
+var (
+	dIPv4min = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("0.0.0.0"))))
+	dIPv4max = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("255.255.255.255"))))
+	dIPv6min = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("::"))))
+	dIPv6max = ipaddr.Addr(uint128.FromBytes([]byte(net.ParseIP("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))))
+)
 
 // dMaxIPv4Addr and dMinIPv6Addr are used as global constants to prevent extra
 // heap extra allocation
-var dMaxIPv4Addr = NewDIPAddr(DIPAddr{ipaddr.IPAddr{Family: ipaddr.IPv4family, Addr: dIPv4max, Mask: 32}})
-var dMinIPv6Addr = NewDIPAddr(DIPAddr{ipaddr.IPAddr{Family: ipaddr.IPv6family, Addr: dIPv6min, Mask: 0}})
+var (
+	dMaxIPv4Addr = NewDIPAddr(DIPAddr{ipaddr.IPAddr{Family: ipaddr.IPv4family, Addr: dIPv4max, Mask: 32}})
+	dMinIPv6Addr = NewDIPAddr(DIPAddr{ipaddr.IPAddr{Family: ipaddr.IPv6family, Addr: dIPv6min, Mask: 0}})
+)
 
 // DMinIPAddr is the min DIPAddr.
 var DMinIPAddr = NewDIPAddr(DIPAddr{ipaddr.IPAddr{Family: ipaddr.IPv4family, Addr: dIPv4min, Mask: 0}})
@@ -1761,9 +1772,11 @@ type ParseTimeContext interface {
 	GetRelativeParseTime() time.Time
 }
 
-var _ ParseTimeContext = &EvalContext{}
-var _ ParseTimeContext = &SemaContext{}
-var _ ParseTimeContext = &simpleParseTimeContext{}
+var (
+	_ ParseTimeContext = &EvalContext{}
+	_ ParseTimeContext = &SemaContext{}
+	_ ParseTimeContext = &simpleParseTimeContext{}
+)
 
 // NewParseTimeContext constructs a ParseTimeContext that returns
 // the given values.
@@ -1967,8 +1980,10 @@ func (d *DTime) Next(_ *EvalContext) (Datum, bool) {
 	return &next, true
 }
 
-var dTimeMin = MakeDTime(timeofday.Min)
-var dTimeMax = MakeDTime(timeofday.Max)
+var (
+	dTimeMin = MakeDTime(timeofday.Min)
+	dTimeMax = MakeDTime(timeofday.Max)
+)
 
 // IsMax implements the Datum interface.
 func (d *DTime) IsMax(_ *EvalContext) bool {
@@ -2482,7 +2497,8 @@ func (d *DTimestampTZ) Size() uintptr {
 
 // stripTimeZone removes the time zone from this TimestampTZ. For example, a
 // TimestampTZ '2012-01-01 12:00:00 +02:00' would become
-//             '2012-01-01 12:00:00'.
+//
+//	'2012-01-01 12:00:00'.
 func (d *DTimestampTZ) stripTimeZone(ctx *EvalContext) *DTimestamp {
 	return d.EvalAtTimeZone(ctx, ctx.GetLocation())
 }
@@ -3206,9 +3222,10 @@ func (d *DTuple) Size() uintptr {
 
 // ContainsNull returns true if the tuple contains NULL, possibly nested inside
 // other tuples. For example, all the following tuples contain NULL:
-//  (1, 2, NULL)
-//  ((1, 1), (2, NULL))
-//  (((1, 1), (2, 2)), ((3, 3), (4, NULL)))
+//
+//	(1, 2, NULL)
+//	((1, 1), (2, NULL))
+//	(((1, 1), (2, 2)), ((3, 3), (4, NULL)))
 func (d *DTuple) ContainsNull() bool {
 	for _, r := range d.D {
 		if r == DNull {
@@ -3675,14 +3692,13 @@ func (d *DOid) Min(ctx *EvalContext) (Datum, bool) {
 //
 // Instead, DOidWrapper allows a standard Datum to be wrapped with a new Oid.
 // This approach provides two major advantages:
-// - performance of the existing Datum types are not affected because they
-//   do not need to have custom oid.Oids added to their structure.
-// - the introduction of new Datum aliases is straightforward and does not require
-//   additions to typing rules or type-dependent evaluation behavior.
+//   - performance of the existing Datum types are not affected because they
+//     do not need to have custom oid.Oids added to their structure.
+//   - the introduction of new Datum aliases is straightforward and does not require
+//     additions to typing rules or type-dependent evaluation behavior.
 //
 // Types that currently benefit from DOidWrapper are:
 // - DName => DOidWrapper(*DString, oid.T_name)
-//
 type DOidWrapper struct {
 	Wrapped Datum
 	Oid     oid.Oid

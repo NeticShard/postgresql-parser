@@ -16,12 +16,12 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/internal/rsg"
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	_ "github.com/auxten/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/internal/rsg"
+	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
 )
 
 func TestFormatStatement(t *testing.T) {

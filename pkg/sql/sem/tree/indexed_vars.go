@@ -13,9 +13,9 @@ package tree
 import (
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // IndexedVarContainer provides the implementation of TypeCheck, Eval, and
@@ -162,10 +162,11 @@ func (h *IndexedVarHelper) AppendSlot() int {
 
 func (h *IndexedVarHelper) checkIndex(idx int) {
 	if idx < 0 || idx >= len(h.vars) {
-		//panic(errors.AssertionFailedf(
+		// panic(errors.AssertionFailedf(
 		//	"invalid var index %d (columns: %d)", log.Safe(idx), log.Safe(len(h.vars))))
 		panic(errors.AssertionFailedf(
-			"invalid var index %d (columns: %d)", idx, len(h.vars)))	}
+			"invalid var index %d (columns: %d)", idx, len(h.vars)))
+	}
 }
 
 // NumVars returns the number of variables the IndexedVarHelper was initialized
@@ -268,19 +269,19 @@ var unboundContainer = &unboundContainerType{}
 
 // IndexedVarEval is part of the IndexedVarContainer interface.
 func (*unboundContainerType) IndexedVarEval(idx int, _ *EvalContext) (Datum, error) {
-	//return nil, errors.AssertionFailedf("unbound ordinal reference @%d", log.Safe(idx+1))
+	// return nil, errors.AssertionFailedf("unbound ordinal reference @%d", log.Safe(idx+1))
 	return nil, errors.AssertionFailedf("unbound ordinal reference @%d", idx+1)
 }
 
 // IndexedVarResolvedType is part of the IndexedVarContainer interface.
 func (*unboundContainerType) IndexedVarResolvedType(idx int) *types.T {
-	//panic(errors.AssertionFailedf("unbound ordinal reference @%d", log.Safe(idx+1)))
+	// panic(errors.AssertionFailedf("unbound ordinal reference @%d", log.Safe(idx+1)))
 	panic(errors.AssertionFailedf("unbound ordinal reference @%d", idx+1))
 }
 
 // IndexedVarNodeFormatter is part of the IndexedVarContainer interface.
 func (*unboundContainerType) IndexedVarNodeFormatter(idx int) NodeFormatter {
-	//panic(errors.AssertionFailedf("unbound ordinal reference @%d", log.Safe(idx+1)))
+	// panic(errors.AssertionFailedf("unbound ordinal reference @%d", log.Safe(idx+1)))
 	panic(errors.AssertionFailedf("unbound ordinal reference @%d", idx+1))
 }
 

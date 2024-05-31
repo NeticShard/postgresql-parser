@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/auxten/postgresql-parser/pkg/util/duration"
+	"github.com/neticshard/postgresql-parser/pkg/util/duration"
 )
 
 func TestString(t *testing.T) {

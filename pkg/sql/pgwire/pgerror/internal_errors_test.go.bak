@@ -16,7 +16,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
 	"github.com/cockroachdb/errors"
 	"github.com/kr/pretty"
 )

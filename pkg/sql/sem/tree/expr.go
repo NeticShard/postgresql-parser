@@ -17,11 +17,11 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	//"github.com/auxten/postgresql-parser/pkg/server/telemetry"
-	"github.com/auxten/postgresql-parser/pkg/sql/lex"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	//"github.com/neticshard/postgresql-parser/pkg/server/telemetry"
+	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // Expr represents an expression.
@@ -74,12 +74,14 @@ type VariableExpr interface {
 	Variable()
 }
 
-var _ VariableExpr = &IndexedVar{}
-var _ VariableExpr = &Subquery{}
-var _ VariableExpr = UnqualifiedStar{}
-var _ VariableExpr = &UnresolvedName{}
-var _ VariableExpr = &AllColumnsSelector{}
-var _ VariableExpr = &ColumnItem{}
+var (
+	_ VariableExpr = &IndexedVar{}
+	_ VariableExpr = &Subquery{}
+	_ VariableExpr = UnqualifiedStar{}
+	_ VariableExpr = &UnresolvedName{}
+	_ VariableExpr = &AllColumnsSelector{}
+	_ VariableExpr = &ColumnItem{}
+)
 
 // operatorExpr is used to identify expression types that involve operators;
 // used by exprStrWithParen.
@@ -88,23 +90,27 @@ type operatorExpr interface {
 	operatorExpr()
 }
 
-var _ operatorExpr = &AndExpr{}
-var _ operatorExpr = &OrExpr{}
-var _ operatorExpr = &NotExpr{}
-var _ operatorExpr = &BinaryExpr{}
-var _ operatorExpr = &UnaryExpr{}
-var _ operatorExpr = &ComparisonExpr{}
-var _ operatorExpr = &RangeCond{}
-var _ operatorExpr = &IsOfTypeExpr{}
+var (
+	_ operatorExpr = &AndExpr{}
+	_ operatorExpr = &OrExpr{}
+	_ operatorExpr = &NotExpr{}
+	_ operatorExpr = &BinaryExpr{}
+	_ operatorExpr = &UnaryExpr{}
+	_ operatorExpr = &ComparisonExpr{}
+	_ operatorExpr = &RangeCond{}
+	_ operatorExpr = &IsOfTypeExpr{}
+)
 
 // Operator is used to identify Operators; used in sql.y.
 type Operator interface {
 	operator()
 }
 
-var _ Operator = UnaryOperator(0)
-var _ Operator = BinaryOperator(0)
-var _ Operator = ComparisonOperator(0)
+var (
+	_ Operator = UnaryOperator(0)
+	_ Operator = BinaryOperator(0)
+	_ Operator = ComparisonOperator(0)
+)
 
 // SubqueryExpr is an interface used to identify an expression as a subquery.
 // It is implemented by both tree.Subquery and optbuilder.subquery, and is
@@ -283,8 +289,10 @@ func (node *ParenExpr) TypedInnerExpr() TypedExpr {
 
 // StripParens strips any parentheses surrounding an expression and
 // returns the inner expression. For instance:
-//   1   -> 1
-//  (1)  -> 1
+//
+//	 1   -> 1
+//	(1)  -> 1
+//
 // ((1)) -> 1
 func StripParens(expr Expr) Expr {
 	if p, ok := expr.(*ParenExpr); ok {
@@ -1511,27 +1519,37 @@ func NewTypedCastExpr(expr TypedExpr, typ *types.T) (*CastExpr, error) {
 }
 
 type castInfo struct {
-	fromT   *types.T
-	//counter telemetry.Counter
+	fromT *types.T
+	// counter telemetry.Counter
 }
 
 var (
 	bitArrayCastTypes = annotateCast(types.VarBit, []*types.T{types.Unknown, types.VarBit, types.Int, types.String, types.AnyCollatedString})
 	boolCastTypes     = annotateCast(types.Bool, []*types.T{types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString})
-	intCastTypes      = annotateCast(types.Int, []*types.T{types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
-		types.Timestamp, types.TimestampTZ, types.Date, types.Interval, types.Oid, types.VarBit})
-	floatCastTypes = annotateCast(types.Float, []*types.T{types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
-		types.Timestamp, types.TimestampTZ, types.Date, types.Interval})
-	decimalCastTypes = annotateCast(types.Decimal, []*types.T{types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
-		types.Timestamp, types.TimestampTZ, types.Date, types.Interval})
-	stringCastTypes = annotateCast(types.String, []*types.T{types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
+	intCastTypes      = annotateCast(types.Int, []*types.T{
+		types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
+		types.Timestamp, types.TimestampTZ, types.Date, types.Interval, types.Oid, types.VarBit,
+	})
+	floatCastTypes = annotateCast(types.Float, []*types.T{
+		types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
+		types.Timestamp, types.TimestampTZ, types.Date, types.Interval,
+	})
+	decimalCastTypes = annotateCast(types.Decimal, []*types.T{
+		types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
+		types.Timestamp, types.TimestampTZ, types.Date, types.Interval,
+	})
+	stringCastTypes = annotateCast(types.String, []*types.T{
+		types.Unknown, types.Bool, types.Int, types.Float, types.Decimal, types.String, types.AnyCollatedString,
 		types.VarBit,
 		types.AnyArray, types.AnyTuple,
-		types.Bytes, types.Timestamp, types.TimestampTZ, types.Interval, types.Uuid, types.Date, types.Time, types.TimeTZ, types.Oid, types.INet, types.Jsonb})
+		types.Bytes, types.Timestamp, types.TimestampTZ, types.Interval, types.Uuid, types.Date, types.Time, types.TimeTZ, types.Oid, types.INet, types.Jsonb,
+	})
 	bytesCastTypes = annotateCast(types.Bytes, []*types.T{types.Unknown, types.String, types.AnyCollatedString, types.Bytes, types.Uuid})
 	dateCastTypes  = annotateCast(types.Date, []*types.T{types.Unknown, types.String, types.AnyCollatedString, types.Date, types.Timestamp, types.TimestampTZ, types.Int})
-	timeCastTypes  = annotateCast(types.Time, []*types.T{types.Unknown, types.String, types.AnyCollatedString, types.Time, types.TimeTZ,
-		types.Timestamp, types.TimestampTZ, types.Interval})
+	timeCastTypes  = annotateCast(types.Time, []*types.T{
+		types.Unknown, types.String, types.AnyCollatedString, types.Time, types.TimeTZ,
+		types.Timestamp, types.TimestampTZ, types.Interval,
+	})
 	timeTZCastTypes    = annotateCast(types.TimeTZ, []*types.T{types.Unknown, types.String, types.AnyCollatedString, types.Time, types.TimeTZ, types.TimestampTZ})
 	timestampCastTypes = annotateCast(types.Timestamp, []*types.T{types.Unknown, types.String, types.AnyCollatedString, types.Date, types.Timestamp, types.TimestampTZ, types.Int})
 	intervalCastTypes  = annotateCast(types.Interval, []*types.T{types.Unknown, types.String, types.AnyCollatedString, types.Int, types.Time, types.Interval, types.Float, types.Decimal})

@@ -8,15 +8,14 @@
 // by the Apache License, Version 2.0, included in the file
 // licenses/APL.txt.
 
+//go:build gofuzz
 // +build gofuzz
 
 package tree
 
-import "github.com/auxten/postgresql-parser/pkg/util/timeutil"
+import "github.com/neticshard/postgresql-parser/pkg/util/timeutil"
 
-var (
-	timeCtx = NewParseTimeContext(timeutil.Now())
-)
+var timeCtx = NewParseTimeContext(timeutil.Now())
 
 func FuzzParseDDecimal(data []byte) int {
 	_, err := ParseDDecimal(string(data))

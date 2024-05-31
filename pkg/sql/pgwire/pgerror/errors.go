@@ -20,15 +20,17 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/lib/pq"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/util/stacktrace"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/util/stacktrace"
 )
 
-var _ error = (*Error)(nil)
-var _ errors.ErrorHinter = (*Error)(nil)
-var _ errors.ErrorDetailer = (*Error)(nil)
-var _ errors.SafeDetailer = (*Error)(nil)
-var _ fmt.Formatter = (*Error)(nil)
+var (
+	_ error                = (*Error)(nil)
+	_ errors.ErrorHinter   = (*Error)(nil)
+	_ errors.ErrorDetailer = (*Error)(nil)
+	_ errors.SafeDetailer  = (*Error)(nil)
+	_ fmt.Formatter        = (*Error)(nil)
+)
 
 // Error implements the error interface.
 func (pg *Error) Error() string { return pg.Message }

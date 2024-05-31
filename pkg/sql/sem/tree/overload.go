@@ -16,10 +16,10 @@ import (
 	"math"
 
 	"github.com/cockroachdb/errors"
-	//"github.com/auxten/postgresql-parser/pkg/server/telemetry"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	//"github.com/neticshard/postgresql-parser/pkg/server/telemetry"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // SpecializedVectorizedBuiltin is used to map overloads
@@ -64,11 +64,11 @@ type Overload struct {
 	AggregateFunc func([]*types.T, *EvalContext, Datums) AggregateFunc
 	WindowFunc    func([]*types.T, *EvalContext) WindowFunc
 	Fn            func(*EvalContext, Datums) (Datum, error)
-	//Generator     GeneratorFactory
+	// Generator     GeneratorFactory
 
 	// counter, if non-nil, should be incremented upon successful
 	// type check of expressions using this overload.
-	//counter telemetry.Counter
+	// counter telemetry.Counter
 
 	// SpecializedVecBuiltin is used to let the vectorized engine
 	// know when an Overload has a specialized vectorized operator.
@@ -143,9 +143,11 @@ type overloadImpl interface {
 	preferred() bool
 }
 
-var _ overloadImpl = &Overload{}
-var _ overloadImpl = &UnaryOp{}
-var _ overloadImpl = &BinOp{}
+var (
+	_ overloadImpl = &Overload{}
+	_ overloadImpl = &UnaryOp{}
+	_ overloadImpl = &BinOp{}
+)
 
 // GetParamsAndReturnType gets the parameters and return type of an
 // overloadImpl.
@@ -174,9 +176,11 @@ type TypeList interface {
 	String() string
 }
 
-var _ TypeList = ArgTypes{}
-var _ TypeList = HomogeneousType{}
-var _ TypeList = VariadicType{}
+var (
+	_ TypeList = ArgTypes{}
+	_ TypeList = HomogeneousType{}
+	_ TypeList = VariadicType{}
+)
 
 // ArgTypes is very similar to ArgTypes except it allows keeping a string
 // name for each argument as well and using those when printing the
@@ -427,9 +431,11 @@ type typeCheckOverloadState struct {
 // expression parameters, along with an optional desired return type. It returns the expression
 // parameters after being type checked, along with a slice of candidate overloadImpls. The
 // slice may have length:
-//   0: overload resolution failed because no compatible overloads were found
-//   1: overload resolution succeeded
-//  2+: overload resolution failed because of ambiguity
+//
+//	 0: overload resolution failed because no compatible overloads were found
+//	 1: overload resolution succeeded
+//	2+: overload resolution failed because of ambiguity
+//
 // The inBinOp parameter denotes whether this type check is occurring within a binary operator,
 // in which case we may need to make a guess that the two parameters are of the same type if one
 // of them is NULL.

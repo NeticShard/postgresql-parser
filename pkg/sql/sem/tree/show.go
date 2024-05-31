@@ -19,7 +19,7 @@
 
 package tree
 
-import "github.com/auxten/postgresql-parser/pkg/sql/lex"
+import "github.com/neticshard/postgresql-parser/pkg/sql/lex"
 
 // ShowVar represents a SHOW statement.
 type ShowVar struct {
@@ -387,8 +387,7 @@ func (node *ShowSyntax) Format(ctx *FmtCtx) {
 }
 
 // ShowTransactionStatus represents a SHOW TRANSACTION STATUS statement.
-type ShowTransactionStatus struct {
-}
+type ShowTransactionStatus struct{}
 
 // Format implements the NodeFormatter interface.
 func (node *ShowTransactionStatus) Format(ctx *FmtCtx) {
@@ -396,8 +395,7 @@ func (node *ShowTransactionStatus) Format(ctx *FmtCtx) {
 }
 
 // ShowSavepointStatus represents a SHOW SAVEPOINT STATUS statement.
-type ShowSavepointStatus struct {
-}
+type ShowSavepointStatus struct{}
 
 // Format implements the NodeFormatter interface.
 func (node *ShowSavepointStatus) Format(ctx *FmtCtx) {
@@ -405,8 +403,7 @@ func (node *ShowSavepointStatus) Format(ctx *FmtCtx) {
 }
 
 // ShowUsers represents a SHOW USERS statement.
-type ShowUsers struct {
-}
+type ShowUsers struct{}
 
 // Format implements the NodeFormatter interface.
 func (node *ShowUsers) Format(ctx *FmtCtx) {
@@ -414,8 +411,7 @@ func (node *ShowUsers) Format(ctx *FmtCtx) {
 }
 
 // ShowRoles represents a SHOW ROLES statement.
-type ShowRoles struct {
-}
+type ShowRoles struct{}
 
 // Format implements the NodeFormatter interface.
 func (node *ShowRoles) Format(ctx *FmtCtx) {

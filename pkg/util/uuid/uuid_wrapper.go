@@ -18,7 +18,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/util/uint128"
+	"github.com/neticshard/postgresql-parser/pkg/util/uint128"
 )
 
 // Short returns the first eight characters of the output of String().
@@ -124,7 +124,8 @@ var fastGen = NewGenWithReader(defaultRandReader{})
 // NewPopulatedUUID returns a populated UUID.
 func NewPopulatedUUID(r interface {
 	Int63() int64
-}) *UUID {
+},
+) *UUID {
 	var u UUID
 	binary.LittleEndian.PutUint64(u[:8], uint64(r.Int63()))
 	binary.LittleEndian.PutUint64(u[8:], uint64(r.Int63()))

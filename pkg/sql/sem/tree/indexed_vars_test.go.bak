@@ -15,9 +15,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/settings/cluster"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/settings/cluster"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
 )
 
 type testVarContainer []Datum

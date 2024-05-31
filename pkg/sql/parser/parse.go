@@ -25,11 +25,11 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
 )
 
 // Statement is the result of parsing a single statement. It contains the AST
@@ -328,6 +328,7 @@ func newBitType(width int32, varying bool) (*types.T, error) {
 
 var errFloatPrecAtLeast1 = pgerror.WithCandidateCode(
 	errors.New("precision for type float must be at least 1 bit"), pgcode.InvalidParameterValue)
+
 var errFloatPrecMax54 = pgerror.WithCandidateCode(
 	errors.New("precision for type float must be less than 54 bits"), pgcode.InvalidParameterValue)
 

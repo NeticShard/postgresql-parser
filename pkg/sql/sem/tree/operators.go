@@ -13,8 +13,8 @@ package tree
 import (
 	"fmt"
 
-	//"github.com/auxten/postgresql-parser/pkg/sql/sqltelemetry"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	//"github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // This file implements the generation of unique names for every
@@ -51,8 +51,8 @@ import (
 
 func init() {
 	// Label the unary operators.
-	//for op, overloads := range UnaryOps {
-	for op, _ := range UnaryOps {
+	// for op, overloads := range UnaryOps {
+	for op := range UnaryOps {
 		if int(op) >= len(unaryOpName) || unaryOpName[op] == "" {
 			panic(fmt.Sprintf("missing name for operator %q", op.String()))
 		}
@@ -64,8 +64,8 @@ func init() {
 	}
 
 	// Label the comparison operators.
-	//for op, overloads := range CmpOps {
-	for op, _ := range CmpOps {
+	// for op, overloads := range CmpOps {
+	for op := range CmpOps {
 		if int(op) >= len(comparisonOpName) || comparisonOpName[op] == "" {
 			panic(fmt.Sprintf("missing name for operator %q", op.String()))
 		}
@@ -79,8 +79,8 @@ func init() {
 	}
 
 	// Label the binary operators.
-	//for op, overloads := range BinOps {
-	for op, _ := range BinOps {
+	// for op, overloads := range BinOps {
+	for op := range BinOps {
 		if int(op) >= len(binaryOpName) || binaryOpName[op] == "" {
 			panic(fmt.Sprintf("missing name for operator %q", op.String()))
 		}

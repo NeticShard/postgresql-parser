@@ -14,12 +14,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/security"
-	"github.com/auxten/postgresql-parser/pkg/security/securitytest"
-	"github.com/auxten/postgresql-parser/pkg/server"
-	"github.com/auxten/postgresql-parser/pkg/testutils/serverutils"
-	"github.com/auxten/postgresql-parser/pkg/testutils/testcluster"
-	"github.com/auxten/postgresql-parser/pkg/util/randutil"
+	"github.com/neticshard/postgresql-parser/pkg/security"
+	"github.com/neticshard/postgresql-parser/pkg/security/securitytest"
+	"github.com/neticshard/postgresql-parser/pkg/server"
+	"github.com/neticshard/postgresql-parser/pkg/testutils/serverutils"
+	"github.com/neticshard/postgresql-parser/pkg/testutils/testcluster"
+	"github.com/neticshard/postgresql-parser/pkg/util/randutil"
 )
 
 //go:generate ../../../util/leaktest/add-leaktest.sh *_test.go

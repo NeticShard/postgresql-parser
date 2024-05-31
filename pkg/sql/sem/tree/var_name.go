@@ -13,16 +13,16 @@ package tree
 import (
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // VarName occurs inside scalar expressions.
 //
 // Immediately after parsing, the following types can occur:
 //
-// - UnqualifiedStar: a naked star as argument to a function, e.g. count(*),
-//   or at the top level of a SELECT clause.
-//   See also uses of StarExpr() and StarSelectExpr() in the grammar.
+//   - UnqualifiedStar: a naked star as argument to a function, e.g. count(*),
+//     or at the top level of a SELECT clause.
+//     See also uses of StarExpr() and StarSelectExpr() in the grammar.
 //
 // - UnresolvedName: other names of the form `a.b....e` or `a.b...e.*`.
 //
@@ -41,11 +41,13 @@ type VarName interface {
 	NormalizeVarName() (VarName, error)
 }
 
-var _ VarName = &UnresolvedName{}
-var _ VarName = UnqualifiedStar{}
-var _ VarName = &AllColumnsSelector{}
-var _ VarName = &TupleStar{}
-var _ VarName = &ColumnItem{}
+var (
+	_ VarName = &UnresolvedName{}
+	_ VarName = UnqualifiedStar{}
+	_ VarName = &AllColumnsSelector{}
+	_ VarName = &TupleStar{}
+	_ VarName = &ColumnItem{}
+)
 
 // UnqualifiedStar corresponds to a standalone '*' in a scalar
 // expression.

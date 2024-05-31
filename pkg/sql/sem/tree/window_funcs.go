@@ -16,8 +16,8 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/encoding"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
 )
 
 // IndexedRows are rows with the corresponding indices.
@@ -189,7 +189,7 @@ func (wfr *WindowFrameRun) FrameStartIdx(ctx context.Context, evalCtx *EvalConte
 		default:
 			return 0, errors.AssertionFailedf(
 				"unexpected WindowFrameBoundType in RANGE mode: %d",
-				//log.Safe(wfr.Frame.Bounds.StartBound.BoundType))
+				// log.Safe(wfr.Frame.Bounds.StartBound.BoundType))
 				wfr.Frame.Bounds.StartBound.BoundType)
 		}
 	case ROWS:
@@ -215,7 +215,7 @@ func (wfr *WindowFrameRun) FrameStartIdx(ctx context.Context, evalCtx *EvalConte
 		default:
 			return 0, errors.AssertionFailedf(
 				"unexpected WindowFrameBoundType in ROWS mode: %d",
-				//log.Safe(wfr.Frame.Bounds.StartBound.BoundType))
+				// log.Safe(wfr.Frame.Bounds.StartBound.BoundType))
 				wfr.Frame.Bounds.StartBound.BoundType)
 		}
 	case GROUPS:
@@ -245,7 +245,7 @@ func (wfr *WindowFrameRun) FrameStartIdx(ctx context.Context, evalCtx *EvalConte
 		default:
 			return 0, errors.AssertionFailedf(
 				"unexpected WindowFrameBoundType in GROUPS mode: %d",
-				//log.Safe(wfr.Frame.Bounds.StartBound.BoundType))
+				// log.Safe(wfr.Frame.Bounds.StartBound.BoundType))
 				wfr.Frame.Bounds.StartBound.BoundType)
 		}
 	default:
@@ -364,7 +364,7 @@ func (wfr *WindowFrameRun) FrameEndIdx(ctx context.Context, evalCtx *EvalContext
 		default:
 			return 0, errors.AssertionFailedf(
 				"unexpected WindowFrameBoundType in RANGE mode: %d",
-				//log.Safe(wfr.Frame.Bounds.EndBound.BoundType))
+				// log.Safe(wfr.Frame.Bounds.EndBound.BoundType))
 				wfr.Frame.Bounds.EndBound.BoundType)
 		}
 	case ROWS:
@@ -394,7 +394,7 @@ func (wfr *WindowFrameRun) FrameEndIdx(ctx context.Context, evalCtx *EvalContext
 		default:
 			return 0, errors.AssertionFailedf(
 				"unexpected WindowFrameBoundType in ROWS mode: %d",
-				//log.Safe(wfr.Frame.Bounds.EndBound.BoundType))
+				// log.Safe(wfr.Frame.Bounds.EndBound.BoundType))
 				wfr.Frame.Bounds.EndBound.BoundType)
 		}
 	case GROUPS:
@@ -429,7 +429,7 @@ func (wfr *WindowFrameRun) FrameEndIdx(ctx context.Context, evalCtx *EvalContext
 		default:
 			return 0, errors.AssertionFailedf(
 				"unexpected WindowFrameBoundType in GROUPS mode: %d",
-				//log.Safe(wfr.Frame.Bounds.EndBound.BoundType))
+				// log.Safe(wfr.Frame.Bounds.EndBound.BoundType))
 				wfr.Frame.Bounds.EndBound.BoundType)
 		}
 	default:

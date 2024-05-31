@@ -14,8 +14,8 @@ import (
 	"os"
 	"testing"
 
-	_ "github.com/auxten/postgresql-parser/pkg/util/log" // for flags
-	"github.com/auxten/postgresql-parser/pkg/util/randutil"
+	_ "github.com/neticshard/postgresql-parser/pkg/util/log" // for flags
+	"github.com/neticshard/postgresql-parser/pkg/util/randutil"
 )
 
 func TestMain(m *testing.M) {

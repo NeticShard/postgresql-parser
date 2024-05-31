@@ -25,10 +25,10 @@ import (
 	"github.com/cockroachdb/apd"
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/util/encoding"
-	"github.com/auxten/postgresql-parser/pkg/util/unique"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
+	"github.com/neticshard/postgresql-parser/pkg/util/unique"
 )
 
 // Type represents a JSON type.
@@ -176,8 +176,10 @@ type jsonNull struct{}
 // NullJSONValue is JSON `null`
 var NullJSONValue = jsonNull{}
 
-type jsonNumber apd.Decimal
-type jsonString string
+type (
+	jsonNumber apd.Decimal
+	jsonString string
+)
 
 type jsonArray []JSON
 
@@ -689,27 +691,33 @@ func ParseJSON(s string) (JSON, error) {
 func EncodeInvertedIndexKeys(b []byte, json JSON) ([][]byte, error) {
 	return json.encodeInvertedIndexKeys(encoding.EncodeJSONAscending(b))
 }
+
 func (j jsonNull) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 	b = encoding.AddJSONPathTerminator(b)
 	return [][]byte{encoding.EncodeNullAscending(b)}, nil
 }
+
 func (jsonTrue) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 	b = encoding.AddJSONPathTerminator(b)
 	return [][]byte{encoding.EncodeTrueAscending(b)}, nil
 }
+
 func (jsonFalse) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 	b = encoding.AddJSONPathTerminator(b)
 	return [][]byte{encoding.EncodeFalseAscending(b)}, nil
 }
+
 func (j jsonString) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 	b = encoding.AddJSONPathTerminator(b)
 	return [][]byte{encoding.EncodeStringAscending(b, string(j))}, nil
 }
+
 func (j jsonNumber) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 	b = encoding.AddJSONPathTerminator(b)
-	var dec = apd.Decimal(j)
+	dec := apd.Decimal(j)
 	return [][]byte{encoding.EncodeDecimalAscending(b, &dec)}, nil
 }
+
 func (j jsonArray) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 	// Checking for an empty array.
 	if len(j) == 0 {
@@ -758,9 +766,11 @@ func (j jsonObject) encodeInvertedIndexKeys(b []byte) ([][]byte, error) {
 		}
 
 		for _, childBytes := range children {
-			encodedKey := bytes.Join([][]byte{b,
+			encodedKey := bytes.Join([][]byte{
+				b,
 				encoding.EncodeJSONKeyStringAscending(nil, string(j[i].k), end),
-				childBytes}, nil)
+				childBytes,
+			}, nil)
 
 			outKeys = append(outKeys, encodedKey)
 		}
@@ -779,18 +789,23 @@ func NumInvertedIndexEntries(j JSON) (int, error) {
 func (j jsonNull) numInvertedIndexEntries() (int, error) {
 	return 1, nil
 }
+
 func (jsonTrue) numInvertedIndexEntries() (int, error) {
 	return 1, nil
 }
+
 func (jsonFalse) numInvertedIndexEntries() (int, error) {
 	return 1, nil
 }
+
 func (j jsonString) numInvertedIndexEntries() (int, error) {
 	return 1, nil
 }
+
 func (j jsonNumber) numInvertedIndexEntries() (int, error) {
 	return 1, nil
 }
+
 func (j jsonArray) numInvertedIndexEntries() (int, error) {
 	if len(j) == 0 {
 		return 1, nil
@@ -1197,7 +1212,7 @@ func insertValKeyOrIdx(j JSON, key string, newVal JSON, insertAfter bool) (JSON,
 			idx++
 		}
 
-		var result = make(jsonArray, len(v)+1)
+		result := make(jsonArray, len(v)+1)
 		if idx <= 0 {
 			copy(result[1:], v)
 			result[0] = newVal
@@ -1275,8 +1290,10 @@ func (jsonFalse) FetchValKeyOrIdx(string) (JSON, error)  { return nil, nil }
 func (jsonString) FetchValKeyOrIdx(string) (JSON, error) { return nil, nil }
 func (jsonNumber) FetchValKeyOrIdx(string) (JSON, error) { return nil, nil }
 
-var errCannotDeleteFromScalar = pgerror.WithCandidateCode(errors.New("cannot delete from scalar"), pgcode.InvalidParameterValue)
-var errCannotDeleteFromObject = pgerror.WithCandidateCode(errors.New("cannot delete from object using integer index"), pgcode.InvalidParameterValue)
+var (
+	errCannotDeleteFromScalar = pgerror.WithCandidateCode(errors.New("cannot delete from scalar"), pgcode.InvalidParameterValue)
+	errCannotDeleteFromObject = pgerror.WithCandidateCode(errors.New("cannot delete from object using integer index"), pgcode.InvalidParameterValue)
+)
 
 func (j jsonObject) SetKey(key string, to JSON, createMissing bool) (jsonObject, error) {
 	result := make(jsonObject, 0, len(j)+1)
@@ -1347,14 +1364,22 @@ func (j jsonObject) RemoveString(s string) (JSON, bool, error) {
 	return jsonObject(newVal), true, nil
 }
 
-func (jsonNull) RemoveString(string) (JSON, bool, error) { return nil, false, errCannotDeleteFromScalar }
-func (jsonTrue) RemoveString(string) (JSON, bool, error) { return nil, false, errCannotDeleteFromScalar }
+func (jsonNull) RemoveString(string) (JSON, bool, error) {
+	return nil, false, errCannotDeleteFromScalar
+}
+
+func (jsonTrue) RemoveString(string) (JSON, bool, error) {
+	return nil, false, errCannotDeleteFromScalar
+}
+
 func (jsonFalse) RemoveString(string) (JSON, bool, error) {
 	return nil, false, errCannotDeleteFromScalar
 }
+
 func (jsonString) RemoveString(string) (JSON, bool, error) {
 	return nil, false, errCannotDeleteFromScalar
 }
+
 func (jsonNumber) RemoveString(string) (JSON, bool, error) {
 	return nil, false, errCannotDeleteFromScalar
 }
@@ -1487,18 +1512,22 @@ func (j jsonTrue) AsText() (*string, error) {
 	s := j.String()
 	return &s, nil
 }
+
 func (j jsonFalse) AsText() (*string, error) {
 	s := j.String()
 	return &s, nil
 }
+
 func (j jsonNumber) AsText() (*string, error) {
 	s := j.String()
 	return &s, nil
 }
+
 func (j jsonArray) AsText() (*string, error) {
 	s := j.String()
 	return &s, nil
 }
+
 func (j jsonObject) AsText() (*string, error) {
 	s := j.String()
 	return &s, nil
@@ -1521,6 +1550,7 @@ func (j jsonArray) Exists(s string) (bool, error) {
 	}
 	return false, nil
 }
+
 func (j jsonObject) Exists(s string) (bool, error) {
 	v, err := j.FetchValKey(s)
 	if err != nil {
@@ -1532,18 +1562,23 @@ func (j jsonObject) Exists(s string) (bool, error) {
 func (j jsonNull) StripNulls() (JSON, bool, error) {
 	return j, false, nil
 }
+
 func (j jsonTrue) StripNulls() (JSON, bool, error) {
 	return j, false, nil
 }
+
 func (j jsonFalse) StripNulls() (JSON, bool, error) {
 	return j, false, nil
 }
+
 func (j jsonNumber) StripNulls() (JSON, bool, error) {
 	return j, false, nil
 }
+
 func (j jsonString) StripNulls() (JSON, bool, error) {
 	return j, false, nil
 }
+
 func (j jsonArray) StripNulls() (JSON, bool, error) {
 	for i, e := range j {
 		json, needToStrip, err := e.StripNulls()
@@ -1566,6 +1601,7 @@ func (j jsonArray) StripNulls() (JSON, bool, error) {
 	}
 	return j, false, nil
 }
+
 func (j jsonObject) StripNulls() (JSON, bool, error) {
 	for i, e := range j {
 		var json JSON
@@ -1617,21 +1653,27 @@ func (j jsonObject) StripNulls() (JSON, bool, error) {
 func (jsonNull) ObjectIter() (*ObjectIterator, error) {
 	return nil, nil
 }
+
 func (jsonTrue) ObjectIter() (*ObjectIterator, error) {
 	return nil, nil
 }
+
 func (jsonFalse) ObjectIter() (*ObjectIterator, error) {
 	return nil, nil
 }
+
 func (jsonNumber) ObjectIter() (*ObjectIterator, error) {
 	return nil, nil
 }
+
 func (jsonString) ObjectIter() (*ObjectIterator, error) {
 	return nil, nil
 }
+
 func (jsonArray) ObjectIter() (*ObjectIterator, error) {
 	return nil, nil
 }
+
 func (j jsonObject) ObjectIter() (*ObjectIterator, error) {
 	return newObjectIterator(j), nil
 }
@@ -1668,6 +1710,7 @@ func (j jsonArray) toGoRepr() (interface{}, error) {
 	}
 	return result, nil
 }
+
 func (j jsonObject) toGoRepr() (interface{}, error) {
 	result := make(map[string]interface{})
 	for _, e := range j {
@@ -1699,15 +1742,19 @@ func (j jsonObject) RemovePath(path []string) (JSON, bool, error) { return j.doR
 func (jsonNull) RemovePath([]string) (JSON, bool, error) {
 	return nil, false, errCannotDeletePathInScalar
 }
+
 func (jsonTrue) RemovePath([]string) (JSON, bool, error) {
 	return nil, false, errCannotDeletePathInScalar
 }
+
 func (jsonFalse) RemovePath([]string) (JSON, bool, error) {
 	return nil, false, errCannotDeletePathInScalar
 }
+
 func (jsonString) RemovePath([]string) (JSON, bool, error) {
 	return nil, false, errCannotDeletePathInScalar
 }
+
 func (jsonNumber) RemovePath([]string) (JSON, bool, error) {
 	return nil, false, errCannotDeletePathInScalar
 }

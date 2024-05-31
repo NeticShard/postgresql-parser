@@ -14,8 +14,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
 )
 
 func TestPlaceholderTypesEquals(t *testing.T) {

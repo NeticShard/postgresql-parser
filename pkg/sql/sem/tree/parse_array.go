@@ -16,16 +16,18 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
 )
 
-var enclosingError = pgerror.Newf(pgcode.InvalidTextRepresentation, "array must be enclosed in { and }")
-var extraTextError = pgerror.Newf(pgcode.InvalidTextRepresentation, "extra text after closing right brace")
-var nestedArraysNotSupportedError = unimplemented.NewWithIssueDetail(32552, "strcast", "nested arrays not supported")
-var malformedError = pgerror.Newf(pgcode.InvalidTextRepresentation, "malformed array")
+var (
+	enclosingError                = pgerror.Newf(pgcode.InvalidTextRepresentation, "array must be enclosed in { and }")
+	extraTextError                = pgerror.Newf(pgcode.InvalidTextRepresentation, "extra text after closing right brace")
+	nestedArraysNotSupportedError = unimplemented.NewWithIssueDetail(32552, "strcast", "nested arrays not supported")
+	malformedError                = pgerror.Newf(pgcode.InvalidTextRepresentation, "malformed array")
+)
 
 var isQuoteChar = func(ch byte) bool {
 	return ch == '"'

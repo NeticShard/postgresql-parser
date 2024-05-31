@@ -21,7 +21,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/auxten/postgresql-parser/pkg/util/encoding/csv"
+	"github.com/neticshard/postgresql-parser/pkg/util/encoding/csv"
 	"log"
 )
 

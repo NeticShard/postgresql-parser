@@ -13,8 +13,8 @@ package privilege_test
 import (
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/privilege"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/sql/privilege"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
 )
 
 func TestPrivilegeDecode(t *testing.T) {

@@ -21,11 +21,11 @@ import (
 	"time"
 
 	"github.com/cockroachdb/apd"
-	"github.com/auxten/postgresql-parser/pkg/settings/cluster"
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/settings/cluster"
+	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
 )
 
 // TestNumericConstantVerifyAndResolveAvailableTypes verifies that test NumVals will

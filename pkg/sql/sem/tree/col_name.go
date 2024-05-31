@@ -11,8 +11,8 @@
 package tree
 
 import (
-	"github.com/auxten/postgresql-parser/pkg/sql/sessiondata"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // GetRenderColName computes a name for a result column.
@@ -193,5 +193,4 @@ func computeCastName(typ *types.T) string {
 		typ = typ.ArrayContents()
 	}
 	return typ.PGName()
-
 }

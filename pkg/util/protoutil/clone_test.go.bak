@@ -16,13 +16,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/config/zonepb"
-	"github.com/auxten/postgresql-parser/pkg/gossip"
-	"github.com/auxten/postgresql-parser/pkg/kv/kvserver/storagepb"
-	"github.com/auxten/postgresql-parser/pkg/roachpb"
-	"github.com/auxten/postgresql-parser/pkg/sql/sqlbase"
-	"github.com/auxten/postgresql-parser/pkg/storage/enginepb"
-	"github.com/auxten/postgresql-parser/pkg/util/protoutil"
+	"github.com/neticshard/postgresql-parser/pkg/config/zonepb"
+	"github.com/neticshard/postgresql-parser/pkg/gossip"
+	"github.com/neticshard/postgresql-parser/pkg/kv/kvserver/storagepb"
+	"github.com/neticshard/postgresql-parser/pkg/roachpb"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sqlbase"
+	"github.com/neticshard/postgresql-parser/pkg/storage/enginepb"
+	"github.com/neticshard/postgresql-parser/pkg/util/protoutil"
 	"github.com/gogo/protobuf/proto"
 )
 

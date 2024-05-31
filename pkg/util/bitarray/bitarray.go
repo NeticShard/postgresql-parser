@@ -18,8 +18,8 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
 )
 
 // BitArray implements a bit string of arbitrary length.
@@ -75,8 +75,10 @@ type BitArray struct {
 
 type word = uint64
 
-const numBytesPerWord = 8
-const numBitsPerWord = 64
+const (
+	numBytesPerWord = 8
+	numBitsPerWord  = 64
+)
 
 // BitLen returns the number of bits stored.
 func (d BitArray) BitLen() uint {

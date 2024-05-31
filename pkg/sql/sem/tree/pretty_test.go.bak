@@ -21,13 +21,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	_ "github.com/auxten/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/testutils/sqlutils"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
-	"github.com/auxten/postgresql-parser/pkg/util/pretty"
+	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/testutils/sqlutils"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/util/pretty"
 	"golang.org/x/sync/errgroup"
 )
 

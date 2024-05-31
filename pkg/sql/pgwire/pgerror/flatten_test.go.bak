@@ -13,10 +13,10 @@ package pgerror_test
 import (
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/roachpb"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticshard/postgresql-parser/pkg/roachpb"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
 	"github.com/cockroachdb/errors"
 	"github.com/cockroachdb/errors/testutils"
 )

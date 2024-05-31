@@ -16,7 +16,7 @@ import (
 	"testing"
 	"time"
 
-	_ "github.com/auxten/postgresql-parser/pkg/util/log"
+	_ "github.com/neticshard/postgresql-parser/pkg/util/log"
 )
 
 type durationTest struct {

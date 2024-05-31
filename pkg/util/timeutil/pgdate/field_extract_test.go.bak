@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/auxten/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
 )
 
 func TestExtractRelative(t *testing.T) {

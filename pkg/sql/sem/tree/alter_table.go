@@ -13,9 +13,9 @@ package tree
 import (
 	"strings"
 
-	//"github.com/auxten/postgresql-parser/pkg/server/telemetry"
-	//"github.com/auxten/postgresql-parser/pkg/sql/sqltelemetry"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	//"github.com/neticshard/postgresql-parser/pkg/server/telemetry"
+	//"github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // AlterTable represents an ALTER TABLE statement.
@@ -77,22 +77,24 @@ func (*AlterTableValidateConstraint) alterTableCmd() {}
 func (*AlterTablePartitionBy) alterTableCmd()        {}
 func (*AlterTableInjectStats) alterTableCmd()        {}
 
-var _ AlterTableCmd = &AlterTableAddColumn{}
-var _ AlterTableCmd = &AlterTableAddConstraint{}
-var _ AlterTableCmd = &AlterTableAlterColumnType{}
-var _ AlterTableCmd = &AlterTableDropColumn{}
-var _ AlterTableCmd = &AlterTableDropConstraint{}
-var _ AlterTableCmd = &AlterTableDropNotNull{}
-var _ AlterTableCmd = &AlterTableDropStored{}
-var _ AlterTableCmd = &AlterTableSetNotNull{}
-var _ AlterTableCmd = &AlterTableRenameColumn{}
-var _ AlterTableCmd = &AlterTableRenameConstraint{}
-var _ AlterTableCmd = &AlterTableRenameTable{}
-var _ AlterTableCmd = &AlterTableSetAudit{}
-var _ AlterTableCmd = &AlterTableSetDefault{}
-var _ AlterTableCmd = &AlterTableValidateConstraint{}
-var _ AlterTableCmd = &AlterTablePartitionBy{}
-var _ AlterTableCmd = &AlterTableInjectStats{}
+var (
+	_ AlterTableCmd = &AlterTableAddColumn{}
+	_ AlterTableCmd = &AlterTableAddConstraint{}
+	_ AlterTableCmd = &AlterTableAlterColumnType{}
+	_ AlterTableCmd = &AlterTableDropColumn{}
+	_ AlterTableCmd = &AlterTableDropConstraint{}
+	_ AlterTableCmd = &AlterTableDropNotNull{}
+	_ AlterTableCmd = &AlterTableDropStored{}
+	_ AlterTableCmd = &AlterTableSetNotNull{}
+	_ AlterTableCmd = &AlterTableRenameColumn{}
+	_ AlterTableCmd = &AlterTableRenameConstraint{}
+	_ AlterTableCmd = &AlterTableRenameTable{}
+	_ AlterTableCmd = &AlterTableSetAudit{}
+	_ AlterTableCmd = &AlterTableSetDefault{}
+	_ AlterTableCmd = &AlterTableValidateConstraint{}
+	_ AlterTableCmd = &AlterTablePartitionBy{}
+	_ AlterTableCmd = &AlterTableInjectStats{}
+)
 
 // ColumnMutationCmd is the subset of AlterTableCmds that modify an
 // existing column.
@@ -125,11 +127,11 @@ func (node *AlterTableAddColumn) Format(ctx *FmtCtx) {
 // stored in node.Cmds, into top-level commands to add those constraints.
 // Currently, this only applies to checks. For example, the ADD COLUMN in
 //
-//     ALTER TABLE t ADD COLUMN a INT CHECK (a < 1)
+//	ALTER TABLE t ADD COLUMN a INT CHECK (a < 1)
 //
 // is transformed into two commands, as in
 //
-//     ALTER TABLE t ADD COLUMN a INT, ADD CONSTRAINT check_a CHECK (a < 1)
+//	ALTER TABLE t ADD COLUMN a INT, ADD CONSTRAINT check_a CHECK (a < 1)
 //
 // (with an auto-generated name).
 //
@@ -139,8 +141,7 @@ func (node *AlterTableAddColumn) Format(ctx *FmtCtx) {
 // constraints. For example, the following statement is accepted in
 // CockroachDB and Postgres, but not necessarily other SQL databases:
 //
-//     ALTER TABLE t ADD COLUMN a INT CHECK (a < b)
-//
+//	ALTER TABLE t ADD COLUMN a INT CHECK (a < b)
 func (node *AlterTable) HoistAddColumnConstraints() {
 	var normalizedCmds AlterTableCmds
 

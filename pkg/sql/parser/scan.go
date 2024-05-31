@@ -19,16 +19,18 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/lex"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
 )
 
-const eof = -1
-const errUnterminated = "unterminated string"
-const errInvalidUTF8 = "invalid UTF-8 byte sequence"
-const errInvalidHexNumeric = "invalid hexadecimal numeric literal"
-const singleQuote = '\''
-const identQuote = '"'
+const (
+	eof                  = -1
+	errUnterminated      = "unterminated string"
+	errInvalidUTF8       = "invalid UTF-8 byte sequence"
+	errInvalidHexNumeric = "invalid hexadecimal numeric literal"
+	singleQuote          = '\''
+	identQuote           = '"'
+)
 
 // scanner lexes SQL statements.
 type scanner struct {
@@ -508,7 +510,7 @@ func (s *scanner) scanIdent(lval *sqlSymType) {
 	// of whether the string is only ASCII or only ASCII lowercase for later.
 	for {
 		ch := s.peek()
-		//fmt.Println(ch, ch >= utf8.RuneSelf, ch >= 'A' && ch <= 'Z')
+		// fmt.Println(ch, ch >= utf8.RuneSelf, ch >= 'A' && ch <= 'Z')
 
 		if ch >= utf8.RuneSelf {
 			isASCII = false
@@ -522,7 +524,7 @@ func (s *scanner) scanIdent(lval *sqlSymType) {
 
 		s.pos++
 	}
-	//fmt.Println("parsed: ", s.in[start:s.pos], isASCII, isLower)
+	// fmt.Println("parsed: ", s.in[start:s.pos], isASCII, isLower)
 
 	if isLower {
 		// Already lowercased - nothing to do.

@@ -19,10 +19,10 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/lib/pq/oid"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/lex"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
 )
 
 // Constant is an constant literal expression which may be resolved to more than one type.
@@ -50,8 +50,10 @@ type Constant interface {
 	ResolveAsType(*SemaContext, *types.T) (Datum, error)
 }
 
-var _ Constant = &NumVal{}
-var _ Constant = &StrVal{}
+var (
+	_ Constant = &NumVal{}
+	_ Constant = &StrVal{}
+)
 
 func isConstant(expr Expr) bool {
 	_, ok := expr.(Constant)
@@ -169,29 +171,33 @@ func (expr *NumVal) Format(ctx *FmtCtx) {
 }
 
 // canBeInt64 checks if it's possible for the value to become an int64:
-//  1   = yes
-//  1.0 = yes
-//  1.1 = no
-//  123...overflow...456 = no
+//
+//	1   = yes
+//	1.0 = yes
+//	1.1 = no
+//	123...overflow...456 = no
 func (expr *NumVal) canBeInt64() bool {
 	_, err := expr.AsInt64()
 	return err == nil
 }
 
 // ShouldBeInt64 checks if the value naturally is an int64:
-//  1   = yes
-//  1.0 = no
-//  1.1 = no
-//  123...overflow...456 = no
+//
+//	1   = yes
+//	1.0 = no
+//	1.1 = no
+//	123...overflow...456 = no
 func (expr *NumVal) ShouldBeInt64() bool {
 	return expr.Kind() == constant.Int && expr.canBeInt64()
 }
 
 // These errors are statically allocated, because they are returned in the
 // common path of AsInt64.
-var errConstNotInt = pgerror.New(pgcode.NumericValueOutOfRange, "cannot represent numeric constant as an int")
-var errConstOutOfRange64 = pgerror.New(pgcode.NumericValueOutOfRange, "numeric constant out of int64 range")
-var errConstOutOfRange32 = pgerror.New(pgcode.NumericValueOutOfRange, "numeric constant out of int32 range")
+var (
+	errConstNotInt       = pgerror.New(pgcode.NumericValueOutOfRange, "cannot represent numeric constant as an int")
+	errConstOutOfRange64 = pgerror.New(pgcode.NumericValueOutOfRange, "numeric constant out of int64 range")
+	errConstOutOfRange32 = pgerror.New(pgcode.NumericValueOutOfRange, "numeric constant out of int32 range")
+)
 
 // AsInt64 returns the value as a 64-bit integer if possible, or returns an
 // error if not possible. The method will set expr.resInt to the value of
@@ -486,12 +492,13 @@ var (
 // respective datum types could succeed. The hope was to eliminate impossibilities
 // and constrain the returned type sets as much as possible. Unfortunately, two issues
 // were found with this approach:
-// - date and timestamp formats do not always imply a fixed-length valid input. For
-//   instance, timestamp formats that take fractional seconds can successfully parse
-//   inputs of varied length.
-// - the set of date and timestamp formats are not disjoint, which means that ambiguity
-//   can not be eliminated when inferring the type of string literals that use these
-//   shared formats.
+//   - date and timestamp formats do not always imply a fixed-length valid input. For
+//     instance, timestamp formats that take fractional seconds can successfully parse
+//     inputs of varied length.
+//   - the set of date and timestamp formats are not disjoint, which means that ambiguity
+//     can not be eliminated when inferring the type of string literals that use these
+//     shared formats.
+//
 // While these limitations still permitted improved type inference in many cases, they
 // resulted in behavior that was ultimately incomplete, resulted in unpredictable levels
 // of inference, and occasionally failed to eliminate ambiguity. Further heuristics could
@@ -556,15 +563,18 @@ func (constantFolderVisitor) VisitPre(expr Expr) (recurse bool, newExpr Expr) {
 var unaryOpToToken = map[UnaryOperator]token.Token{
 	UnaryMinus: token.SUB,
 }
+
 var unaryOpToTokenIntOnly = map[UnaryOperator]token.Token{
 	UnaryComplement: token.XOR,
 }
+
 var binaryOpToToken = map[BinaryOperator]token.Token{
 	Plus:  token.ADD,
 	Minus: token.SUB,
 	Mult:  token.MUL,
 	Div:   token.QUO,
 }
+
 var binaryOpToTokenIntOnly = map[BinaryOperator]token.Token{
 	FloorDiv: token.QUO_ASSIGN,
 	Mod:      token.REM,
@@ -572,6 +582,7 @@ var binaryOpToTokenIntOnly = map[BinaryOperator]token.Token{
 	Bitor:    token.OR,
 	Bitxor:   token.XOR,
 }
+
 var comparisonOpToToken = map[ComparisonOperator]token.Token{
 	EQ: token.EQL,
 	NE: token.NEQ,
@@ -677,7 +688,8 @@ func (constantFolderVisitor) VisitPost(expr Expr) (retExpr Expr) {
 //
 // TODO(nvanbenschoten): Can this visitor be preallocated (like normalizeVisitor)?
 // TODO(nvanbenschoten): Investigate normalizing associative operations to group
-//     constants together and permit further numeric constant folding.
+//
+//	constants together and permit further numeric constant folding.
 func FoldConstantLiterals(expr Expr) (Expr, error) {
 	v := constantFolderVisitor{}
 	expr, _ = WalkExpr(v, expr)

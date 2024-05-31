@@ -18,11 +18,11 @@ import (
 	"github.com/cockroachdb/apd"
 	"github.com/pkg/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/util/duration"
-	"github.com/auxten/postgresql-parser/pkg/util/hlc"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/util/duration"
+	"github.com/neticshard/postgresql-parser/pkg/util/hlc"
 )
 
 // FollowerReadTimestampFunctionName is the name of the function which can be

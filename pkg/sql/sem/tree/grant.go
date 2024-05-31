@@ -19,7 +19,7 @@
 
 package tree
 
-import "github.com/auxten/postgresql-parser/pkg/sql/privilege"
+import "github.com/neticshard/postgresql-parser/pkg/sql/privilege"
 
 // Grant represents a GRANT statement.
 type Grant struct {

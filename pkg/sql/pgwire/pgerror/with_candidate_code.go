@@ -17,7 +17,7 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/gogo/protobuf/proto"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
 )
 
 type withCandidateCode struct {
@@ -25,10 +25,12 @@ type withCandidateCode struct {
 	code  string
 }
 
-var _ error = (*withCandidateCode)(nil)
-var _ errors.SafeDetailer = (*withCandidateCode)(nil)
-var _ fmt.Formatter = (*withCandidateCode)(nil)
-var _ errors.Formatter = (*withCandidateCode)(nil)
+var (
+	_ error               = (*withCandidateCode)(nil)
+	_ errors.SafeDetailer = (*withCandidateCode)(nil)
+	_ fmt.Formatter       = (*withCandidateCode)(nil)
+	_ errors.Formatter    = (*withCandidateCode)(nil)
+)
 
 func (w *withCandidateCode) Error() string         { return w.cause.Error() }
 func (w *withCandidateCode) Cause() error          { return w.cause }

@@ -14,12 +14,12 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	_ "github.com/auxten/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/auxten/postgresql-parser/pkg/sql/types"
-	"github.com/auxten/postgresql-parser/pkg/testutils"
-	"github.com/auxten/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticshard/postgresql-parser/pkg/testutils"
+	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
 )
 
 // The following tests need both the type checking infrastructure and also

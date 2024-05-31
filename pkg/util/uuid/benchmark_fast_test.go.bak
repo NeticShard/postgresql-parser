@@ -13,7 +13,7 @@ package uuid_test
 import (
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/util/uuid"
+	"github.com/neticshard/postgresql-parser/pkg/util/uuid"
 )
 
 func BenchmarkFastMakeV4(b *testing.B) {

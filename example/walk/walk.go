@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	"github.com/auxten/postgresql-parser/pkg/walk"
+	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	"github.com/neticshard/postgresql-parser/pkg/walk"
 )
 
 func main() {

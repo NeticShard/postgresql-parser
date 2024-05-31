@@ -14,24 +14,30 @@ import (
 	"github.com/cockroachdb/apd"
 	"github.com/cockroachdb/errors"
 
-	"github.com/auxten/postgresql-parser/pkg/util/encoding"
+	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
 )
 
 // This file implements the format described in the JSONB encoding RFC.
 
 const offlenStride = 32
 
-const arrayContainerTag = 0x80000000
-const objectContainerTag = 0x40000000
-const scalarContainerTag = 0x20000000
+const (
+	arrayContainerTag  = 0x80000000
+	objectContainerTag = 0x40000000
+	scalarContainerTag = 0x20000000
+)
 
-const containerHeaderTypeMask = 0xE0000000
-const containerHeaderLenMask = 0x1FFFFFFF
+const (
+	containerHeaderTypeMask = 0xE0000000
+	containerHeaderLenMask  = 0x1FFFFFFF
+)
 
 const maxByteLength = int(jEntryOffLenMask)
 
-const containerHeaderLen = 4
-const jEntryLen = 4
+const (
+	containerHeaderLen = 4
+	jEntryLen          = 4
+)
 
 // checkLength ensures that an encoded value is not too long to fit into the
 // JEntry header. This should never come up, since it would require a ~250MB

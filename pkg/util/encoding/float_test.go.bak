@@ -16,7 +16,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/util/randutil"
+	"github.com/neticshard/postgresql-parser/pkg/util/randutil"
 )
 
 func TestEncodeFloatOrdered(t *testing.T) {

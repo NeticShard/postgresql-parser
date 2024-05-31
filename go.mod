@@ -1,4 +1,4 @@
-module github.com/auxten/postgresql-parser
+module github.com/neticshard/postgresql-parser
 
 go 1.15
 

@@ -5,9 +5,9 @@ import (
 	"log"
 	"strings"
 
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	"github.com/auxten/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/auxten/postgresql-parser/pkg/util/set"
+	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticshard/postgresql-parser/pkg/util/set"
 )
 
 type AstWalker struct {
@@ -27,7 +27,6 @@ func (rc ReferredCols) ToList() []string {
 }
 
 func (w *AstWalker) Walk(stmts parser.Statements, ctx interface{}) (ok bool, err error) {
-
 	w.UnknownNodes = make([]interface{}, 0)
 	asts := make([]tree.NodeFormatter, len(stmts))
 	for si, stmt := range stmts {
@@ -250,7 +249,7 @@ func isColumn(node interface{}) bool {
 // ColNamesInSelect finds all referred variables in a Select Statement.
 // (variables = sub-expressions, placeholders, indexed vars, etc.)
 // Implementation limits:
-//	1. Table with AS is not normalized.
+//  1. Table with AS is not normalized.
 //  2. Columns referred from outer query are not translated.
 func ColNamesInSelect(sql string) (referredCols ReferredCols, err error) {
 	referredCols = make(ReferredCols, 0)

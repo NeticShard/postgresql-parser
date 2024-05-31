@@ -15,8 +15,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/auxten/postgresql-parser/pkg/roachpb"
-	"github.com/auxten/postgresql-parser/pkg/util/encoding"
+	"github.com/neticshard/postgresql-parser/pkg/roachpb"
+	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
 )
 
 func TestUndoPrefixEnd(t *testing.T) {
