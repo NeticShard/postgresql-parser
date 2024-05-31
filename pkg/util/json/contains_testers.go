@@ -48,18 +48,22 @@ func (j jsonNull) slowContains(other JSON) bool {
 	c, _ := j.Compare(other)
 	return c == 0
 }
+
 func (j jsonTrue) slowContains(other JSON) bool {
 	c, _ := j.Compare(other)
 	return c == 0
 }
+
 func (j jsonFalse) slowContains(other JSON) bool {
 	c, _ := j.Compare(other)
 	return c == 0
 }
+
 func (j jsonNumber) slowContains(other JSON) bool {
 	c, _ := j.Compare(other)
 	return c == 0
 }
+
 func (j jsonString) slowContains(other JSON) bool {
 	c, _ := j.Compare(other)
 	return c == 0

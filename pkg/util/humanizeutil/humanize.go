@@ -66,8 +66,10 @@ type BytesValue struct {
 	isSet bool
 }
 
-var _ flag.Value = &BytesValue{}
-var _ pflag.Value = &BytesValue{}
+var (
+	_ flag.Value  = &BytesValue{}
+	_ pflag.Value = &BytesValue{}
+)
 
 // NewBytesValue creates a new pflag.Value bound to the specified
 // int64 variable. It also happens to be a flag.Value.

@@ -19,35 +19,42 @@ import (
 var (
 	// Oid is the type of a Postgres Object ID value.
 	Oid = &T{InternalType: InternalType{
-		Family: OidFamily, Oid: oid.T_oid, Locale: &emptyLocale}}
+		Family: OidFamily, Oid: oid.T_oid, Locale: &emptyLocale,
+	}}
 
 	// Regclass is the type of a Postgres regclass OID variant (T_regclass).
 	RegClass = &T{InternalType: InternalType{
-		Family: OidFamily, Oid: oid.T_regclass, Locale: &emptyLocale}}
+		Family: OidFamily, Oid: oid.T_regclass, Locale: &emptyLocale,
+	}}
 
 	// RegNamespace is the type of a Postgres regnamespace OID variant
 	// (T_regnamespace).
 	RegNamespace = &T{InternalType: InternalType{
-		Family: OidFamily, Oid: oid.T_regnamespace, Locale: &emptyLocale}}
+		Family: OidFamily, Oid: oid.T_regnamespace, Locale: &emptyLocale,
+	}}
 
 	// RegProc is the type of a Postgres regproc OID variant (T_regproc).
 	RegProc = &T{InternalType: InternalType{
-		Family: OidFamily, Oid: oid.T_regproc, Locale: &emptyLocale}}
+		Family: OidFamily, Oid: oid.T_regproc, Locale: &emptyLocale,
+	}}
 
 	// RegProcedure is the type of a Postgres regprocedure OID variant
 	// (T_regprocedure).
 	RegProcedure = &T{InternalType: InternalType{
-		Family: OidFamily, Oid: oid.T_regprocedure, Locale: &emptyLocale}}
+		Family: OidFamily, Oid: oid.T_regprocedure, Locale: &emptyLocale,
+	}}
 
 	// RegType is the type of of a Postgres regtype OID variant (T_regtype).
 	RegType = &T{InternalType: InternalType{
-		Family: OidFamily, Oid: oid.T_regtype, Locale: &emptyLocale}}
+		Family: OidFamily, Oid: oid.T_regtype, Locale: &emptyLocale,
+	}}
 
 	// OidVector is a type-alias for an array of Oid values, but with a different
 	// OID (T_oidvector instead of T__oid). It is a special VECTOR type used by
 	// Postgres in system tables. OidVectors are 0-indexed, unlike normal arrays.
 	OidVector = &T{InternalType: InternalType{
-		Family: ArrayFamily, Oid: oid.T_oidvector, ArrayContents: Oid, Locale: &emptyLocale}}
+		Family: ArrayFamily, Oid: oid.T_oidvector, ArrayContents: Oid, Locale: &emptyLocale,
+	}}
 )
 
 // OidToType maps Postgres object IDs to CockroachDB types.  We export the map

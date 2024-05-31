@@ -1356,24 +1356,26 @@ func (stmt *BeginTransaction) walkStmt(v Visitor) Statement {
 	return ret
 }
 
-var _ walkableStmt = &CreateTable{}
-var _ walkableStmt = &Backup{}
-var _ walkableStmt = &Delete{}
-var _ walkableStmt = &Explain{}
-var _ walkableStmt = &Insert{}
-var _ walkableStmt = &Import{}
-var _ walkableStmt = &ParenSelect{}
-var _ walkableStmt = &Restore{}
-var _ walkableStmt = &Select{}
-var _ walkableStmt = &SelectClause{}
-var _ walkableStmt = &SetClusterSetting{}
-var _ walkableStmt = &SetVar{}
-var _ walkableStmt = &Update{}
-var _ walkableStmt = &ValuesClause{}
-var _ walkableStmt = &CancelQueries{}
-var _ walkableStmt = &CancelSessions{}
-var _ walkableStmt = &ControlJobs{}
-var _ walkableStmt = &BeginTransaction{}
+var (
+	_ walkableStmt = &CreateTable{}
+	_ walkableStmt = &Backup{}
+	_ walkableStmt = &Delete{}
+	_ walkableStmt = &Explain{}
+	_ walkableStmt = &Insert{}
+	_ walkableStmt = &Import{}
+	_ walkableStmt = &ParenSelect{}
+	_ walkableStmt = &Restore{}
+	_ walkableStmt = &Select{}
+	_ walkableStmt = &SelectClause{}
+	_ walkableStmt = &SetClusterSetting{}
+	_ walkableStmt = &SetVar{}
+	_ walkableStmt = &Update{}
+	_ walkableStmt = &ValuesClause{}
+	_ walkableStmt = &CancelQueries{}
+	_ walkableStmt = &CancelSessions{}
+	_ walkableStmt = &ControlJobs{}
+	_ walkableStmt = &BeginTransaction{}
+)
 
 // walkStmt walks the entire parsed stmt calling WalkExpr on each
 // expression, and replacing each expression with the one returned
@@ -1468,5 +1470,7 @@ func StmtDebugString(stmt Statement) string {
 }
 
 // Silence any warnings if these functions are not used.
-var _ = ExprDebugString
-var _ = StmtDebugString
+var (
+	_ = ExprDebugString
+	_ = StmtDebugString
+)

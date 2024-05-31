@@ -81,9 +81,11 @@ type ParseError struct {
 	Err       error // The actual error
 }
 
-var _ error = (*ParseError)(nil)
-var _ fmt.Formatter = (*ParseError)(nil)
-var _ errors.Formatter = (*ParseError)(nil)
+var (
+	_ error            = (*ParseError)(nil)
+	_ fmt.Formatter    = (*ParseError)(nil)
+	_ errors.Formatter = (*ParseError)(nil)
+)
 
 // Error implements error.
 func (e *ParseError) Error() string { return fmt.Sprintf("%v", e) }

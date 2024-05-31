@@ -8,6 +8,7 @@
 // by the Apache License, Version 2.0, included in the file
 // licenses/APL.txt.
 
+//go:build !linux
 // +build !linux
 
 package hlc
@@ -20,8 +21,7 @@ import (
 
 // ClockSource contains the handle of the clock device as well as the
 // clock id.
-type ClockSource struct {
-}
+type ClockSource struct{}
 
 // UnixNano is not used on platforms other than Linux
 func (p ClockSource) UnixNano() int64 {

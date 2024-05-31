@@ -162,15 +162,17 @@ type CCLOnlyStatement interface {
 	cclOnlyStatement()
 }
 
-var _ CCLOnlyStatement = &Backup{}
-var _ CCLOnlyStatement = &ShowBackup{}
-var _ CCLOnlyStatement = &Restore{}
-var _ CCLOnlyStatement = &CreateRole{}
-var _ CCLOnlyStatement = &GrantRole{}
-var _ CCLOnlyStatement = &RevokeRole{}
-var _ CCLOnlyStatement = &CreateChangefeed{}
-var _ CCLOnlyStatement = &Import{}
-var _ CCLOnlyStatement = &Export{}
+var (
+	_ CCLOnlyStatement = &Backup{}
+	_ CCLOnlyStatement = &ShowBackup{}
+	_ CCLOnlyStatement = &Restore{}
+	_ CCLOnlyStatement = &CreateRole{}
+	_ CCLOnlyStatement = &GrantRole{}
+	_ CCLOnlyStatement = &RevokeRole{}
+	_ CCLOnlyStatement = &CreateChangefeed{}
+	_ CCLOnlyStatement = &Import{}
+	_ CCLOnlyStatement = &Export{}
+)
 
 // StatementType implements the Statement interface.
 func (*AlterIndex) StatementType() StatementType { return DDL }

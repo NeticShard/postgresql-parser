@@ -19,9 +19,11 @@ type ReturningClause interface {
 	returningClause()
 }
 
-var _ ReturningClause = &ReturningExprs{}
-var _ ReturningClause = &ReturningNothing{}
-var _ ReturningClause = &NoReturningClause{}
+var (
+	_ ReturningClause = &ReturningExprs{}
+	_ ReturningClause = &ReturningNothing{}
+	_ ReturningClause = &NoReturningClause{}
+)
 
 // ReturningExprs represents RETURNING expressions.
 type ReturningExprs SelectExprs

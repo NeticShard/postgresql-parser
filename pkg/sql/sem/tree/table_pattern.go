@@ -36,9 +36,11 @@ type TablePattern interface {
 	NormalizeTablePattern() (TablePattern, error)
 }
 
-var _ TablePattern = &UnresolvedName{}
-var _ TablePattern = &TableName{}
-var _ TablePattern = &AllTablesSelector{}
+var (
+	_ TablePattern = &UnresolvedName{}
+	_ TablePattern = &TableName{}
+	_ TablePattern = &AllTablesSelector{}
+)
 
 // NormalizeTablePattern resolves an UnresolvedName to either a
 // TableName or AllTablesSelector.
