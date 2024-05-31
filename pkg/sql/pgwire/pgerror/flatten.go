@@ -17,7 +17,7 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
 )
 
 // Flatten turns any error into a pgerror with fields populated.  As

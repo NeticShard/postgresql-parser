@@ -15,13 +15,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/neticshard/postgresql-parser/pkg/kv"
-	"github.com/neticshard/postgresql-parser/pkg/roachpb"
-	_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/testutils"
-	"github.com/neticshard/postgresql-parser/pkg/util/hlc"
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticlabs/postgresql-parser/pkg/kv"
+	"github.com/neticlabs/postgresql-parser/pkg/roachpb"
+	_ "github.com/neticlabs/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/testutils"
+	"github.com/neticlabs/postgresql-parser/pkg/util/hlc"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 )
 
 // Test that EvalContext.GetClusterTimestamp() gets its timestamp from the

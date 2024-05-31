@@ -25,10 +25,10 @@ import (
 	"github.com/cockroachdb/apd"
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
-	"github.com/neticshard/postgresql-parser/pkg/util/unique"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/util/encoding"
+	"github.com/neticlabs/postgresql-parser/pkg/util/unique"
 )
 
 // Type represents a JSON type.

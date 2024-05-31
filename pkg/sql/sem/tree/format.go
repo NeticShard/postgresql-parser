@@ -17,9 +17,9 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
-	"github.com/neticshard/postgresql-parser/pkg/util"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/util"
 )
 
 // FmtFlags carries options for the pretty-printer.

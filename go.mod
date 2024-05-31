@@ -1,4 +1,4 @@
-module github.com/neticshard/postgresql-parser
+module github.com/neticlabs/postgresql-parser
 
 go 1.15
 
@@ -8,7 +8,7 @@ require (
 	github.com/cockroachdb/errors v1.11.3
 	github.com/dustin/go-humanize v1.0.1
 	github.com/getsentry/raven-go v0.2.0
-	github.com/getsentry/sentry-go v0.28.0 // indirect
+	github.com/getsentry/sentry-go v0.28.0 // indirectlg
 	github.com/gogo/protobuf v1.3.2
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/lib/pq v1.10.9

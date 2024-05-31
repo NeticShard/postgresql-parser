@@ -13,8 +13,8 @@ package tree
 import (
 	"fmt"
 
-	//"github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	//"github.com/neticlabs/postgresql-parser/pkg/sql/sqltelemetry"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 // This file implements the generation of unique names for every

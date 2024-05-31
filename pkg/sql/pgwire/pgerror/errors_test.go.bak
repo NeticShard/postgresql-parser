@@ -15,8 +15,8 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/roachpb"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/roachpb"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
 )
 
 func TestPGError(t *testing.T) {

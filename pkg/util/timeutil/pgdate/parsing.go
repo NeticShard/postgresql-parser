@@ -15,9 +15,9 @@ import (
 
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeutil"
 )
 
 // Various keywords that appear in timestamps.

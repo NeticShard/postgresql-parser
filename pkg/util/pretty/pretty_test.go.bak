@@ -13,7 +13,7 @@ package pretty_test
 import (
 	"fmt"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/pretty"
+	"github.com/neticlabs/postgresql-parser/pkg/util/pretty"
 )
 
 // Example_align demonstrates alignment.

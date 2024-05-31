@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticlabs/postgresql-parser/pkg/util/errorutil/unimplemented"
 )
 
 // The functions in this file are used by fieldExtract.Extract().

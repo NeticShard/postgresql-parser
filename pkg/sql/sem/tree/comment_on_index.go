@@ -10,7 +10,7 @@
 
 package tree
 
-import "github.com/neticshard/postgresql-parser/pkg/sql/lex"
+import "github.com/neticlabs/postgresql-parser/pkg/sql/lex"
 
 // CommentOnIndex represents a COMMENT ON INDEX statement.
 type CommentOnIndex struct {

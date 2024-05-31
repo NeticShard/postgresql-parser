@@ -14,8 +14,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
 )
 
 // RunShowSyntax analyzes the syntax and reports its structure as data

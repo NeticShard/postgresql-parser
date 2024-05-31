@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
 )
 
 func main() {

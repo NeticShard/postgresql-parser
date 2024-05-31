@@ -13,9 +13,9 @@ package tree
 import (
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 // IndexedVarContainer provides the implementation of TypeCheck, Eval, and

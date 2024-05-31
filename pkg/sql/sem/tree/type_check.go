@@ -15,19 +15,19 @@ import (
 	"strings"
 	"time"
 
-	//"github.com/neticshard/postgresql-parser/pkg/server/telemetry"
+	//"github.com/neticlabs/postgresql-parser/pkg/server/telemetry"
 	"github.com/cockroachdb/errors"
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sessiondata"
 	"golang.org/x/text/language"
 
-	//"github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
-	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
-	"github.com/neticshard/postgresql-parser/pkg/util/hlc"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
+	//"github.com/neticlabs/postgresql-parser/pkg/sql/sqltelemetry"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticlabs/postgresql-parser/pkg/util/hlc"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeutil"
 )
 
 // SemaContext defines the context in which to perform semantic analysis on an

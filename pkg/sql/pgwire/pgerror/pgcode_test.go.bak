@@ -16,8 +16,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
 	"github.com/cockroachdb/errors"
 	"github.com/cockroachdb/errors/testutils"
 )

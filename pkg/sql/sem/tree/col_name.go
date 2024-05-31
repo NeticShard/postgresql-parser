@@ -11,8 +11,8 @@
 package tree
 
 import (
-	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sessiondata"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 // GetRenderColName computes a name for a result column.

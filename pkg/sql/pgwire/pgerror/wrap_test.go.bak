@@ -13,9 +13,9 @@ package pgerror_test
 import (
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/roachpb"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/roachpb"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
 	"github.com/cockroachdb/errors"
 )
 

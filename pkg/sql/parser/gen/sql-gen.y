@@ -29,11 +29,11 @@ import (
 
     "go/constant"
 
-    "github.com/neticshard/postgresql-parser/pkg/sql/lex"
-    "github.com/neticshard/postgresql-parser/pkg/sql/privilege"
-    "github.com/neticshard/postgresql-parser/pkg/sql/roleoption"
-    "github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-    "github.com/neticshard/postgresql-parser/pkg/sql/types"
+    "github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+    "github.com/neticlabs/postgresql-parser/pkg/sql/privilege"
+    "github.com/neticlabs/postgresql-parser/pkg/sql/roleoption"
+    "github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+    "github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 

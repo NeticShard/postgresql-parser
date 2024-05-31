@@ -4,7 +4,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
 )
 
 func TestParser(t *testing.T) {

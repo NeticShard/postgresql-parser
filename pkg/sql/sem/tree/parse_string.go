@@ -13,8 +13,8 @@ package tree
 import (
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
-	"github.com/neticshard/postgresql-parser/pkg/util"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/util"
 )
 
 // ParseAndRequireString parses s as type t for simple types. Arrays and collated

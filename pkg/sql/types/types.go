@@ -18,9 +18,9 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/lib/pq/oid"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/util/errorutil/unimplemented"
-	"github.com/neticshard/postgresql-parser/pkg/util/protoutil"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/util/errorutil/unimplemented"
+	"github.com/neticlabs/postgresql-parser/pkg/util/protoutil"
 )
 
 // T is an instance of a SQL scalar, array, or tuple type. It describes the

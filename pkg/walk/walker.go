@@ -5,9 +5,9 @@ import (
 	"log"
 	"strings"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/util/set"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/util/set"
 )
 
 type AstWalker struct {

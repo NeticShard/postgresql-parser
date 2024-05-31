@@ -13,7 +13,7 @@ package errorutil
 import (
 	"fmt"
 
-	//"github.com/neticshard/postgresql-parser/pkg/settings"
+	//"github.com/neticlabs/postgresql-parser/pkg/settings"
 
 	"github.com/cockroachdb/errors"
 )
@@ -30,7 +30,7 @@ func UnexpectedWithIssueErrorf(issue int, format string, args ...interface{}) er
 	err = errors.WithHint(err,
 		fmt.Sprintf("We've been trying to track this particular issue down. "+
 			"Please report your reproduction at "+
-			"https://github.com/neticshard/postgresql-parser/issues/%d "+
+			"https://github.com/neticlabs/postgresql-parser/issues/%d "+
 			"unless that issue seems to have been resolved "+
 			"(in which case you might want to update crdb to a newer version).",
 			issue))

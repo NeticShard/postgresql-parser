@@ -27,13 +27,13 @@ import (
 	"github.com/cockroachdb/apd"
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/bitarray"
-	"github.com/neticshard/postgresql-parser/pkg/util/duration"
-	"github.com/neticshard/postgresql-parser/pkg/util/ipaddr"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeofday"
-	"github.com/neticshard/postgresql-parser/pkg/util/timetz"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
-	"github.com/neticshard/postgresql-parser/pkg/util/uuid"
+	"github.com/neticlabs/postgresql-parser/pkg/util/bitarray"
+	"github.com/neticlabs/postgresql-parser/pkg/util/duration"
+	"github.com/neticlabs/postgresql-parser/pkg/util/ipaddr"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeofday"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timetz"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticlabs/postgresql-parser/pkg/util/uuid"
 )
 
 const (

@@ -12,10 +12,10 @@ import (
 	"strings"
 
 	"github.com/cockroachdb/errors"
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/sql/privilege"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/privilege"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 //line sql-gen.y:24

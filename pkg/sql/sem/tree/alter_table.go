@@ -13,9 +13,9 @@ package tree
 import (
 	"strings"
 
-	//"github.com/neticshard/postgresql-parser/pkg/server/telemetry"
-	//"github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	//"github.com/neticlabs/postgresql-parser/pkg/server/telemetry"
+	//"github.com/neticlabs/postgresql-parser/pkg/sql/sqltelemetry"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 // AlterTable represents an ALTER TABLE statement.

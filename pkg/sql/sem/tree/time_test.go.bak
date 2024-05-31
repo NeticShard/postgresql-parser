@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 	"github.com/stretchr/testify/assert"
 )
 

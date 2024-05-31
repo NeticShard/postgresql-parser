@@ -11,8 +11,8 @@
 package tree
 
 import (
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 // Prepare represents a PREPARE statement.

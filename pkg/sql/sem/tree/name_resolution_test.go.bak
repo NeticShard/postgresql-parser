@@ -16,12 +16,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
-	"github.com/neticshard/postgresql-parser/pkg/testutils"
-	"github.com/neticshard/postgresql-parser/pkg/testutils/sqlutils"
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sessiondata"
+	"github.com/neticlabs/postgresql-parser/pkg/testutils"
+	"github.com/neticlabs/postgresql-parser/pkg/testutils/sqlutils"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 )
 
 func TestClassifyTablePattern(t *testing.T) {

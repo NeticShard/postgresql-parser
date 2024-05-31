@@ -13,7 +13,7 @@
 
 package tree
 
-import "github.com/neticshard/postgresql-parser/pkg/util/timeutil"
+import "github.com/neticlabs/postgresql-parser/pkg/util/timeutil"
 
 var timeCtx = NewParseTimeContext(timeutil.Now())
 

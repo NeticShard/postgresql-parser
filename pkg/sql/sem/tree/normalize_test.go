@@ -13,13 +13,13 @@ package tree_test
 import (
 	"testing"
 
-	//"github.com/neticshard/postgresql-parser/pkg/settings/cluster"
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
-	//_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	//"github.com/neticlabs/postgresql-parser/pkg/settings/cluster"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
+	//_ "github.com/neticlabs/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sessiondata"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 )
 
 func TestContainsVars(t *testing.T) {
@@ -70,7 +70,7 @@ func TestNormalizeExpr(t *testing.T) {
 		// These expression previously always mapped INT2/INT4 to INT8, but after
 		// unifying the type system, they now produce better results. Leaving the
 		// tests here to make sure they don't regress. See
-		// https://github.com/neticshard/postgresql-parser/issues/32639
+		// https://github.com/neticlabs/postgresql-parser/issues/32639
 		{`CAST(NULL AS INT2)`, `CAST(NULL AS INT2)`},
 		{`CAST(NULL AS INT4)`, `CAST(NULL AS INT4)`},
 		{`CAST(NULL AS INT8)`, `CAST(NULL AS INT8)`},

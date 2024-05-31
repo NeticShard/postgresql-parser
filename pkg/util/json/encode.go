@@ -14,7 +14,7 @@ import (
 	"github.com/cockroachdb/apd"
 	"github.com/cockroachdb/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
+	"github.com/neticlabs/postgresql-parser/pkg/util/encoding"
 )
 
 // This file implements the format described in the JSONB encoding RFC.

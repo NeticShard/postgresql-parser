@@ -18,13 +18,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	//_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/testutils"
-	"github.com/neticshard/postgresql-parser/pkg/testutils/sqlutils"
-	//_ "github.com/neticshard/postgresql-parser/pkg/util/log" // for flags
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	//_ "github.com/neticlabs/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/testutils"
+	"github.com/neticlabs/postgresql-parser/pkg/testutils/sqlutils"
+	//_ "github.com/neticlabs/postgresql-parser/pkg/util/log" // for flags
 	"github.com/cockroachdb/errors"
 	"github.com/stretchr/testify/assert"
 )

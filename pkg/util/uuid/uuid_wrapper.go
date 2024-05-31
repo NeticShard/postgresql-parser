@@ -18,7 +18,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/uint128"
+	"github.com/neticlabs/postgresql-parser/pkg/util/uint128"
 )
 
 // Short returns the first eight characters of the output of String().

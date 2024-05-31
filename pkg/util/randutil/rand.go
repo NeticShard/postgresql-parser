@@ -18,7 +18,7 @@ import (
 
 	log "github.com/sirupsen/logrus" // Don't bring cockroach/util/log into this low-level package.
 
-	"github.com/neticshard/postgresql-parser/pkg/util/envutil"
+	"github.com/neticlabs/postgresql-parser/pkg/util/envutil"
 )
 
 // NewPseudoSeed generates a seed from crypto/rand.

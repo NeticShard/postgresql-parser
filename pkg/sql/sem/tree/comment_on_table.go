@@ -10,7 +10,7 @@
 
 package tree
 
-import "github.com/neticshard/postgresql-parser/pkg/sql/lex"
+import "github.com/neticlabs/postgresql-parser/pkg/sql/lex"
 
 // CommentOnTable represents an COMMENT ON TABLE statement.
 type CommentOnTable struct {

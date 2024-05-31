@@ -19,8 +19,8 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
 )
 
 const (

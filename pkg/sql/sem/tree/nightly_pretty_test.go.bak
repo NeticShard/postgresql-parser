@@ -16,9 +16,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	_ "github.com/neticlabs/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 )
 
 // TestPrettyData reads in a single SQL statement from a file, formats it at

@@ -13,8 +13,8 @@ package tree
 import (
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 )
 
 var (

@@ -10,7 +10,7 @@
 
 package tree
 
-// import "github.com/neticshard/postgresql-parser/pkg/sql/sqltelemetry"
+// import "github.com/neticlabs/postgresql-parser/pkg/sql/sqltelemetry"
 
 // FunctionDefinition implements a reference to the (possibly several)
 // overloads for a built-in function.

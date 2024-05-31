@@ -16,7 +16,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/util/protoutil"
+	"github.com/neticlabs/postgresql-parser/pkg/util/protoutil"
 	"github.com/lib/pq/oid"
 	"github.com/stretchr/testify/assert"
 )

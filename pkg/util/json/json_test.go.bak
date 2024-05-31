@@ -20,10 +20,10 @@ import (
 	"testing"
 
 	"github.com/cockroachdb/apd"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/util/encoding"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
-	"github.com/neticshard/postgresql-parser/pkg/util/unique"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/util/encoding"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticlabs/postgresql-parser/pkg/util/unique"
 )
 
 func eachPair(a, b JSON, f func(a, b JSON)) {

@@ -13,12 +13,12 @@ package tree_test
 import (
 	"testing"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/parser"
-	_ "github.com/neticshard/postgresql-parser/pkg/sql/sem/builtins"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sem/tree"
-	"github.com/neticshard/postgresql-parser/pkg/sql/sessiondata"
-	"github.com/neticshard/postgresql-parser/pkg/testutils"
-	"github.com/neticshard/postgresql-parser/pkg/util/leaktest"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/parser"
+	_ "github.com/neticlabs/postgresql-parser/pkg/sql/sem/builtins"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sem/tree"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/sessiondata"
+	"github.com/neticlabs/postgresql-parser/pkg/testutils"
+	"github.com/neticlabs/postgresql-parser/pkg/util/leaktest"
 )
 
 func TestResolveFunction(t *testing.T) {

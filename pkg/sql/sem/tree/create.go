@@ -24,13 +24,13 @@ import (
 	"strings"
 
 	"github.com/cockroachdb/errors"
-	"github.com/neticshard/postgresql-parser/pkg/sql/lex"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/lex"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
 	"golang.org/x/text/language"
 
-	//"github.com/neticshard/postgresql-parser/pkg/sql/roleoption"
-	"github.com/neticshard/postgresql-parser/pkg/sql/types"
+	//"github.com/neticlabs/postgresql-parser/pkg/sql/roleoption"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/types"
 )
 
 // CreateDatabase represents a CREATE DATABASE statement.
@@ -714,7 +714,7 @@ func (node *ReferenceActions) Format(ctx *FmtCtx) {
 }
 
 // CompositeKeyMatchMethod is the algorithm use when matching composite keys.
-// See https://github.com/neticshard/postgresql-parser/issues/20305 or
+// See https://github.com/neticlabs/postgresql-parser/issues/20305 or
 // https://www.postgresql.org/docs/11/sql-createtable.html for details on the
 // different composite foreign key matching methods.
 type CompositeKeyMatchMethod int

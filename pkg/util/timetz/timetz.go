@@ -15,11 +15,11 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgerror"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeofday"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeutil"
-	"github.com/neticshard/postgresql-parser/pkg/util/timeutil/pgdate"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgerror"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeofday"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeutil"
+	"github.com/neticlabs/postgresql-parser/pkg/util/timeutil/pgdate"
 )
 
 var (

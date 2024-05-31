@@ -10,7 +10,7 @@
 
 package json
 
-import "github.com/neticshard/postgresql-parser/pkg/util/encoding"
+import "github.com/neticlabs/postgresql-parser/pkg/util/encoding"
 
 const (
 	nullTag      = 0x00000000
@@ -29,7 +29,7 @@ const (
 
 // jEntry is a header for a particular JSON value. See the JSONB encoding RFC
 // for an explanation of its purpose and format:
-// https://github.com/neticshard/postgresql-parser/blob/master/docs/RFCS/20171005_jsonb_encoding.md
+// https://github.com/neticlabs/postgresql-parser/blob/master/docs/RFCS/20171005_jsonb_encoding.md
 type jEntry struct {
 	typCode uint32
 	length  uint32

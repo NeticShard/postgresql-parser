@@ -20,8 +20,8 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/lib/pq"
 
-	"github.com/neticshard/postgresql-parser/pkg/sql/pgwire/pgcode"
-	"github.com/neticshard/postgresql-parser/pkg/util/stacktrace"
+	"github.com/neticlabs/postgresql-parser/pkg/sql/pgwire/pgcode"
+	"github.com/neticlabs/postgresql-parser/pkg/util/stacktrace"
 )
 
 var (
